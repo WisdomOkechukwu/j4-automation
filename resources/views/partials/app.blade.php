@@ -9,13 +9,17 @@
 	{{-- working on this later TAKE NOTE --}}
 	{{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon"> --}}
 
+	{{-- Font --}}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+	{{-- End Font --}}
 
+	{{-- Bootstrap CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/simple-datatables/style.css') }}">
 </head>
 
 <body>
@@ -66,9 +70,9 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="assets/images/faces/1.jpg">
+                                                <img src="{{ asset('assets/images/faces/1.jpg') }}">
                                             </div>
-                                        </div>
+                                        </div>˜
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
@@ -93,17 +97,6 @@
 
 				@yield('content')
 
-                <footer>
-                    <div class="footer clearfix mb-0 text-muted">
-                        <div class="float-start">
-                            <p>2023 &copy; J4 Automation</p>
-                        </div>
-                        {{-- <div class="float-end">
-                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                                by <a href="https://ahmadsaugi.com">Saugi</a></p>
-                        </div> --}}
-                    </div>
-                </footer>
             </div>
         </div>
     </div>
@@ -111,10 +104,15 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }} "></script>
 
-    {{-- <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> --}}
-
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+	<script src="{{ asset('assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+
+	<script>
+        // Simple Datatable
+        let table = document.querySelector('.users-table');
+        let dataTable = new simpleDatatables.DataTable(table);
+    </script>
 </body>
 
 </html>
