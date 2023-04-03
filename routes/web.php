@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.index');
 });
 
 // Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'marketing'] ], function () {
@@ -36,16 +36,3 @@ Route::group(['prefix' => 'field'], function () {
     });
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::GET('/', [AdminController::class,'index'])->name('admin.index');
-    Route::GET('/user-schedules', [AdminController::class,'allSchedules'])->name('admin.user.schedules');
-    Route::GET('/operator-schedules', [AdminController::class,'scheduleOperator'])->name('admin.user.schedule.operator');
-    Route::GET('/field-worker-schedules', [AdminController::class,'scheduleFieldWorker'])->name('admin.user.schedule.field.worker');
-    Route::GET('/operator-overview', [AdminController::class,'operatorOverview'])->name('admin.user.operator.overview');
-    Route::GET('/field-worker-overview', [AdminController::class,'fieldWorkerOverview'])->name('admin.user.field.worker.overview');
-    Route::GET('/users', [AdminController::class,'allUsers'])->name('admin.users');
-    Route::GET('/user-profile', [AdminController::class,'userProfile'])->name('admin.user-profile');
-    Route::GET('/user-message', [AdminController::class,'userMessage'])->name('admin.user-message');
-    Route::GET('/assign-tickets', [AdminController::class,'assignTicket'])->name('admin.assign.tickets');
-    Route::GET('/leave-tracker', [AdminController::class,'leaveTracker'])->name('admin.leave.tracker');
-});
