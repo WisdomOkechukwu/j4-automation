@@ -10,24 +10,34 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
-                                    role="tab" aria-controls="home" aria-selected="true">All(24)</a>
+                                <a class="nav-link active" id="all-users-tab" data-bs-toggle="tab" href="#all-users"
+                                    role="tab" aria-controls="all-users-tab" aria-selected="true"
+                                    onclick="generateScheduleTable('all-users')">All(24)</a>
                             </li>
+
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                    role="tab" aria-controls="profile" aria-selected="false">Operators(10)</a>
+                                <a class="nav-link" id="operators-tab" data-bs-toggle="tab" href="#operators"
+                                    role="tab" aria-controls="operators-tab" aria-selected="true"
+                                    onclick="generateScheduleTable('operators')">Operators(24)</a>
                             </li>
+
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
-                                    role="tab" aria-controls="contact" aria-selected="false">Field Workers(10)</a>
+                                <a class="nav-link" id="field-admin-tab" data-bs-toggle="tab" href="#field-admin"
+                                    role="tab" aria-controls="field-admin-tab" aria-selected="true"
+                                    onclick="generateScheduleTable('field-admin')">Field Admin(24)</a>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="field-worker-tab" data-bs-toggle="tab" href="#field-worker"
+                                    role="tab" aria-controls="field-worker-tab" aria-selected="true"
+                                    onclick="generateScheduleTable('field-worker')">Field Worker(24)</a>
                             </li>
                         </ul>
 
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active mt-4" id="home" role="tabpanel"
-                                aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active mt-4" id="all-users" role="tabpanel" aria-labelledby="all-users">
                                 <div class="table-responsive">
-                                    <table class="table table-lg users-table">
+                                    <table class="table table-lg users-table-all-users users-table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -48,54 +58,72 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="mt-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-lg users-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Job Role</th>
-                                                    <th>ID Number</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-bold-500">Daniel Craig</td>
-                                                    <td>007</td>
-                                                    <td class="text-bold-500">007Agent</td>
-                                                    <td><a href="" class="btn btn-primary">Schedule</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="tab-pane fade active mt-4 d-none" id="operators" role="tabpanel" aria-labelledby="operators">
+                                <div class="table-responsive">
+                                    <table class="table table-lg users-table-operators">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Job Role</th>
+                                                <th>ID Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-bold-500">Daniel Craig</td>
+                                                <td>007</td>
+                                                <td class="text-bold-500">007Agent</td>
+                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            
-                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                               <div class="mt-4">
-                                    <div class="table-responsive">
-                                            <table class="table table-lg users-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Job Role</th>
-                                                        <th>ID Number</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-bold-500">Daniel Craig</td>
-                                                        <td>007</td>
-                                                        <td class="text-bold-500">007Agent</td>
-                                                        <td><a href="" class="btn btn-primary">Schedule</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+
+                            <div class="tab-pane fade active mt-4 d-none" id="field-admin" role="tabpanel" aria-labelledby="field-admin">
+                                <div class="table-responsive">
+                                    <table class="table table-lg users-table-field-admin">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Job Role</th>
+                                                <th>ID Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-bold-500">Daniel Craig</td>
+                                                <td>007</td>
+                                                <td class="text-bold-500">007Agent</td>
+                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade active mt-4 d-none" id="field-worker" role="tabpanel" aria-labelledby="field-worker">
+                                <div class="table-responsive">
+                                    <table class="table table-lg users-table-field-worker">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Job Role</th>
+                                                <th>ID Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-bold-500">Daniel Craig</td>
+                                                <td>007</td>
+                                                <td class="text-bold-500">007Agent</td>
+                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
-    public function index()
+    public static function index()
     {
         // staff strength
 
