@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FieldAdminController;
 use App\Http\Controllers\FieldWorkerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +22,9 @@ Route::get('/', function () {
     return redirect()->route('admin.index');
 });
 
-// Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'marketing'] ], function () {
+Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name('login');
+
+Route::GET('/home', [HomeController::class,'redirectPersonnel'])->name('home');
 
 Route::group(['prefix' => 'field'], function () {
 
