@@ -18,7 +18,7 @@ class FieldWorker
     {
         $user = Auth::user();
 
-        if($user->role == 777 ){
+        if($user->role_id == 777 ){
             return $next($request);
         }else{
             abort(404);

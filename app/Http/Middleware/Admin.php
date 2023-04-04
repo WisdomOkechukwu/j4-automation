@@ -18,7 +18,7 @@ class Admin
     {
         $user = Auth::user();
 
-        if($user->role == 999 ){
+        if($user->role_id == 999){
             return $next($request);
         }else{
             abort(404);

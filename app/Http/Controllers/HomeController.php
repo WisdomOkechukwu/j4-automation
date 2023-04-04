@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     public static function redirectPersonnel(){
         $role = Auth::user()->role_id;
 
         switch ($role) {
             case 999:
-                dd('Admin');
                 return redirect()->route('admin.index');
                 break;
 

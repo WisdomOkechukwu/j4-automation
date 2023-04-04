@@ -18,7 +18,7 @@ class Operator
     {
         $user = Auth::user();
 
-        if($user->role == 889 ){
+        if($user->role_id == 889 ){
             return $next($request);
         }else{
             abort(404);

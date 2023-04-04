@@ -18,7 +18,7 @@ class FieldAdmin
     {
         $user = Auth::user();
 
-        if($user->role == 779 ){
+        if($user->role_id == 779 ){
             return $next($request);
         }else{
             abort(404);
