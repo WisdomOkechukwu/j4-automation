@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    
+
     <div class="row">
         <h5>Operator Insight</h5>
         <div class="col-xl-4 col-md-6 col-sm-12">
@@ -117,7 +117,7 @@
         </div>
     </div>
 
-    
+
     <div class="row">
         <h5>Field Worker Insight</h5>
         <div class="col-xl-4 col-md-6 col-sm-12">

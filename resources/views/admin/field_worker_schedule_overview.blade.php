@@ -2,7 +2,7 @@
 @section('content')
     <section class="card text-center">
         <h5 class="mt-4">Field Worker Tracking Overview</h5>
-        
+
         <div class="container row mt-2">
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
@@ -43,7 +43,7 @@
                 <button class='btn btn-danger' disabled>OD</button>
             </div>
         </div>
-        
+
         <div class="m-4">
             <div class="table-responsive">
                 <table class="table mb-0">

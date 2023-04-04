@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>J4 Automation Dashboard</title>
-	{{-- working on this later TAKE NOTE --}}
-	{{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon"> --}}
+    {{-- working on this later TAKE NOTE --}}
+    {{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon"> --}}
 
-	{{-- Font --}}
+    {{-- Font --}}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
-	{{-- End Font --}}
+    {{-- End Font --}}
 
-	{{-- Bootstrap CSS --}}
+    {{-- Bootstrap CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -37,12 +37,13 @@
                             </a>
                         </div>
                         <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i
+                                    class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
                 </div>
-				{{-- sidbar for Admins --}}
-				@include('partials.sidebar.field-worker')
+                {{-- sidbar for Admins --}}
+                @include('partials.sidebar.field-worker')
                 {{-- end sidebar for Admin --}}
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -81,11 +82,12 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, John!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="#"><i
+                                                class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
                                             Settings</a></li>
-                                        <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
@@ -97,23 +99,23 @@
             </header>
             <div id="main-content">
 
-				@yield('content')
+                @yield('content')
 
             </div>
         </div>
     </div>
 
-    <script src="{{asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-	<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }} "></script>
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }} "></script>
 
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-	<script src="{{ asset('assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/extensions/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-	<script>
+    <script>
         // Simple Datatable
         let table = document.querySelector('.users-table');
         let dataTable = new simpleDatatables.DataTable(table);

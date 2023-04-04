@@ -10,8 +10,8 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
-                                    role="tab" aria-controls="home" aria-selected="true">All(24)</a>
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">All(24)</a>
                             </li>
                             {{-- <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
@@ -28,11 +28,11 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <button type="button" class="btn btn-outline-primary block"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                        Bulk Assign
+                                        <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalCenter">
+                                            Bulk Assign
                                         </button>
-                                    </div>    
+                                    </div>
                                 </div>
 
                                 <div class="table-responsive text-center">
@@ -49,9 +49,9 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-bold-500">
-                                                <input type="checkbox"
-                                                    class="form-check-input form-check-primary form-check-glow"
-                                                    name="customCheck" id="customColorCheck1">
+                                                    <input type="checkbox"
+                                                        class="form-check-input form-check-primary form-check-glow"
+                                                        name="customCheck" id="customColorCheck1">
                                                     Daniel Craig
                                                 </td>
                                                 <td>TheDanielCraig@gmail.com</td>
@@ -59,12 +59,12 @@
                                                 <td class="text-bold-500">007Agent</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary block"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                                    Assign
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                                        Assign
                                                     </button>
                                                 </td>
 
-                                                
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -131,17 +131,15 @@
 
 
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-            role="document">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title" id="exampleModalCenterTitle">
                         Meal Ticket Information
                     </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal"
-                        aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
@@ -190,13 +188,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary"
-                        data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>
-                    <button type="button" class="btn btn-primary ml-1"
-                        data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
                         <i class="bx bx-check d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Save</span>
                     </button>

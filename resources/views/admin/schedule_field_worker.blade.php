@@ -2,7 +2,7 @@
 @section('content')
     <section class="card text-center">
         <h5 class="mt-4">John Wick Schedule</h5>
-        
+
         <div class="container row">
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
@@ -31,10 +31,10 @@
             <div class="col-md-2">
                 <button class='btn btn-success pl-4 pr-4' disabled>WD</button>
                 <button class='btn btn-danger pl-4 pr-4' disabled>OD</button>
-            
+
             </div>
         </div>
-        
+
         <div class="border rounded m-4">
             <div class="table-responsive">
                 <table class="table table-borderless mb-0">
@@ -54,154 +54,77 @@
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
                         </tr>
@@ -210,154 +133,77 @@
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
                         </tr>
@@ -366,154 +212,77 @@
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group-vertical mr-2">
                                     <input type="hidden" id="status" name="" value="" />
-                                    <button 
-                                        type="button"
-                                        class="btn btn-outline-secondary" 
-                                        disabled>1</button>
-                                    <button
-                                        id="day"
-                                        type="button"
-                                        class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}
-                                        >WD</button>
-                                    <button
-                                        id="night"
-                                        type="button"
-                                        class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}
-                                        >OD</button>
+                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
+                                    <button id="day" type="button" class="btn btn-outline-success"
+                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
+                                    <button id="night" type="button" class="btn btn-outline-danger"
+                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
                                 </div>
                             </td>
                         </tr>
@@ -563,12 +332,12 @@
                     <div class="col-md-2">
                         <button class='btn btn-success pl-4 pr-4' disabled>ON</button>
                         <button class='btn btn-danger pl-4 pr-4' disabled>OFF</button>
-                    
+
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="row container mb-4">
             <div class="table-responsive">
                 <table class="table mb-0">
@@ -586,44 +355,37 @@
                     <tbody>
                         <tr>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>
                             <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
                                 <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
                             </td>

@@ -2,7 +2,7 @@
 @section('content')
     <section class="card text-center">
         <h5 class="mt-4">Operator Schedule Overview</h5>
-        
+
         <div class="container row">
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
@@ -44,7 +44,7 @@
                 <button class='btn btn-danger' disabled>OFF</button>
             </div>
         </div>
-        
+
         <div class="m-4">
             <div class="table-responsive">
                 <table class="table mb-0">

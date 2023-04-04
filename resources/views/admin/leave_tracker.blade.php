@@ -10,17 +10,17 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
-                                    role="tab" aria-controls="home" aria-selected="true">All(24)</a>
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">All(24)</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                    role="tab" aria-controls="profile" aria-selected="false" onclick="generateTable('operator')">
+                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false" onclick="generateTable('operator')">
                                     Operators(10)</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
-                                    role="tab" aria-controls="contact" aria-selected="false" onclick="generateTable('field')">
+                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
+                                    aria-controls="contact" aria-selected="false" onclick="generateTable('field')">
                                     Field Workers(10)</a>
                             </li>
                         </ul>
@@ -74,13 +74,13 @@
                                                 </td>
                                                 <td class="col-md-2">Field</td>
                                                 <td class="col-md-2">
-                                                    <input class="form-control" value = "4"/>
+                                                    <input class="form-control" value="4" />
                                                 </td>
                                                 <td class="col-md-2">
-                                                    <input class="form-control" value = "4"/>
+                                                    <input class="form-control" value="4" />
                                                 </td>
                                                 <td class="col-md-2">
-                                                    <input class="form-control" value = "4"/>
+                                                    <input class="form-control" value="4" />
                                                 </td>
                                                 <td class="col-md-2">
                                                     20
@@ -102,8 +102,8 @@
                                                     <label class="col-form-label">Annual Leave</label>
                                                 </div>
                                                 <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control" name="fname"
-                                                        placeholder="Enter Value">
+                                                    <input type="text" id="first-name" class="form-control"
+                                                        name="fname" placeholder="Enter Value">
                                                 </div>
                                             </div>
                                         </div>
@@ -113,8 +113,8 @@
                                                     <label class="col-form-label">Casual Leave</label>
                                                 </div>
                                                 <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control" name="fname"
-                                                        placeholder="Enter Value">
+                                                    <input type="text" id="first-name" class="form-control"
+                                                        name="fname" placeholder="Enter Value">
                                                 </div>
                                             </div>
                                         </div>
@@ -139,13 +139,13 @@
                                                     </td>
                                                     <td class="col-md-2">Field</td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
                                                         20
@@ -156,9 +156,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                               <div class="mt-4">
+                                <div class="mt-4">
                                     <div class="row">
                                         <div class="col-md-4">
                                         </div>
@@ -168,8 +168,8 @@
                                                     <label class="col-form-label">Annual Leave</label>
                                                 </div>
                                                 <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control" name="fname"
-                                                        placeholder="Enter Value">
+                                                    <input type="text" id="first-name" class="form-control"
+                                                        name="fname" placeholder="Enter Value">
                                                 </div>
                                             </div>
                                         </div>
@@ -179,8 +179,8 @@
                                                     <label class="col-form-label">Casual Leave</label>
                                                 </div>
                                                 <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control" name="fname"
-                                                        placeholder="Enter Value">
+                                                    <input type="text" id="first-name" class="form-control"
+                                                        name="fname" placeholder="Enter Value">
                                                 </div>
                                             </div>
                                         </div>
@@ -205,13 +205,13 @@
                                                     </td>
                                                     <td class="col-md-2">Field</td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" value = "4"/>
+                                                        <input class="form-control" value="4" />
                                                     </td>
                                                     <td class="col-md-2">
                                                         20
