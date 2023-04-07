@@ -31,6 +31,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error','Invalid login details');
         }
 
-        return redirect()->route('home'); //take note of the invoke function
+        return redirect()->intended();
+        // return redirect()->route('home'); //take note of the invoke function
     }
 }

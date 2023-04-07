@@ -43,7 +43,27 @@
                     </div>
                 </div>
                 {{-- sidbar for Admins --}}
-                @include('partials.sidebar.field-worker')
+                @switch(auth()->user()->role_id)
+                    @case(999)
+                        @include('partials.sidebar.admin')
+                    @break
+
+                    @case(889)
+                        @include('partials.sidebar.operator')
+                    @break
+
+                    @case(779)
+                        @include('partials.sidebar.field-admin')
+                    @break
+
+                    @case(777)
+                        @include('partials.sidebar.field-worker')
+                    @break
+
+                    @default
+                        {{-- @include('partials.sidebar.field-worker') --}}
+                @endswitch
+                {{-- @include('partials.sidebar.field-worker') --}}
                 {{-- end sidebar for Admin --}}
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>

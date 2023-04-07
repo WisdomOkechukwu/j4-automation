@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->timestamp('date', 0)->nullable();
-            $table->string('shift');
-            $table->boolean('is_meal');
-            $table->longText('meal_name');
+            $table->string('shift')->nullable();
+            $table->boolean('is_meal')->nullable();
+            $table->longText('meal_name')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

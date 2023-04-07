@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
-            $table->integer('annual_leave');
-            $table->integer('casual_leave');
-            $table->integer('leave_taken');
-            $table->integer('remaining');
-            $table->integer('year');
+            $table->integer('annual_leave')->nullable();
+            $table->integer('casual_leave')->nullable();
+            $table->integer('leave_taken')->nullable();
+            $table->integer('remaining')->nullable();
+            $table->integer('year')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

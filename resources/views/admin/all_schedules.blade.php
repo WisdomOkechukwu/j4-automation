@@ -12,25 +12,25 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="all-users-tab" data-bs-toggle="tab" href="#all-users"
                                     role="tab" aria-controls="all-users-tab" aria-selected="true"
-                                    onclick="generateScheduleTable('all-users')">All(24)</a>
+                                    onclick="generateScheduleTable('all-users')">All({{ $users->count() }})</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="operators-tab" data-bs-toggle="tab" href="#operators" role="tab"
                                     aria-controls="operators-tab" aria-selected="true"
-                                    onclick="generateScheduleTable('operators')">Operators(24)</a>
+                                    onclick="generateScheduleTable('operators')">Operators({{ $operators->count() }})</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="field-admin-tab" data-bs-toggle="tab" href="#field-admin"
                                     role="tab" aria-controls="field-admin-tab" aria-selected="true"
-                                    onclick="generateScheduleTable('field-admin')">Field Admin(24)</a>
+                                    onclick="generateScheduleTable('field-admin')">Field Worker Admin({{ $fieldAdmin->count() }})</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="field-worker-tab" data-bs-toggle="tab" href="#field-worker"
                                     role="tab" aria-controls="field-worker-tab" aria-selected="true"
-                                    onclick="generateScheduleTable('field-worker')">Field Worker(24)</a>
+                                    onclick="generateScheduleTable('field-worker')">Field Worker({{ $fieldWorker->count() }})</a>
                             </li>
                         </ul>
 
@@ -48,12 +48,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($users as $u)
                                             <tr>
-                                                <td class="text-bold-500">Daniel Craig</td>
-                                                <td>007</td>
-                                                <td class="text-bold-500">007Agent</td>
-                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                                <td class="text-bold-500">{{ $u->full_name }}</td>
+                                                <td>{{ $u->role->name }}</td>
+                                                <td class="text-bold-500">{{ $u->id_number }}</td>
+                                                @if($u->role_id == 889)
+                                                <td><a href="{{ route('admin.user.schedule.operator', [$u]) }}" class="btn btn-primary">Schedule</a></td>
+                                                @else
+                                                <td><a href="{{ route('admin.user.schedule.field.worker', [$u]) }}" class="btn btn-primary">Schedule</a></td>
+                                                @endif
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -72,12 +78,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($operators as $u)
                                             <tr>
-                                                <td class="text-bold-500">Daniel Craig</td>
-                                                <td>007</td>
-                                                <td class="text-bold-500">007Agent</td>
-                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                                <td class="text-bold-500">{{ $u->full_name }}</td>
+                                                <td>{{ $u->role->name }}</td>
+                                                <td class="text-bold-500">{{ $u->id_number }}</td>
+                                                <td><a href="{{ route('admin.user.schedule.operator', [$u]) }}" class="btn btn-primary">Schedule</a></td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -96,12 +104,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($fieldAdmin as $u)
                                             <tr>
-                                                <td class="text-bold-500">Daniel Craig</td>
-                                                <td>007</td>
-                                                <td class="text-bold-500">007Agent</td>
-                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                                <td class="text-bold-500">{{ $u->full_name }}</td>
+                                                <td>{{ $u->role->name }}</td>
+                                                <td class="text-bold-500">{{ $u->id_number }}</td>
+                                                <td><a href="{{ route('admin.user.schedule.field.worker', [$u]) }}" class="btn btn-primary">Schedule</a></td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -120,12 +130,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($fieldWorker as $u)
                                             <tr>
-                                                <td class="text-bold-500">Daniel Craig</td>
-                                                <td>007</td>
-                                                <td class="text-bold-500">007Agent</td>
-                                                <td><a href="" class="btn btn-primary">Schedule</a></td>
+                                                <td class="text-bold-500">{{ $u->full_name }}</td>
+                                                <td>{{ $u->role->name }}</td>
+                                                <td class="text-bold-500">{{ $u->id_number }}</td>
+                                                <td><a href="{{ route('admin.user.schedule.field.worker', [$u]) }}" class="btn btn-primary">Schedule</a></td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

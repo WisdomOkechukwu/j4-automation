@@ -1,25 +1,31 @@
 @extends('partials.app')
 @section('content')
     <section class="card text-center">
-        <h5 class="mt-4">John Wick Schedule</h5>
+        <h5 class="mt-4">{{ $user->full_name }} Schedule
+            <br>
+            <h6>{{ $segment }}</h6>
+        </h5>
 
         <div class="container row">
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
-                    <select class="form-select" id="basicSelect">
-                        <option>January</option>
-                        <option>Febuary</option>
-                        <option>March</option>
+                    <select name class="form-select" id="month_dropdown"
+                        onchange="sortFieldWorkerSchedule({{ $user->id }})">
+                        <option value="noData">Select Month</option>
+                        @foreach ($months as $ms)
+                            <option value="{{ $ms['number'] }}">{{ $ms['month'] }}</option>
+                        @endforeach
                     </select>
                 </fieldset>
             </div>
 
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
-                    <select class="form-select" id="basicSelect">
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
+                    <select class="form-select" id="year_dropdown" onchange="sortFieldWorkerSchedule({{ $user->id }})">
+                        <option value="noData">Select Year</option>
+                        @foreach ($years as $ys)
+                            <option value="{{ $ys }}">{{ $ys }}</option>
+                        @endforeach
                     </select>
                 </fieldset>
             </div>
@@ -35,365 +41,306 @@
             </div>
         </div>
 
-        <div class="border rounded m-4">
-            <div class="table-responsive">
-                <table class="table table-borderless mb-0">
-                    <thead>
-                        <tr>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
+        <form action="{{ route('admin.user.schedule.field.worker.action') }}" method="POST">
+            @csrf
 
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
+            <div class="border rounded m-4">
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0">
+                        <thead>
+                            <tr>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($days as $key => $day)
+                                <tr>
 
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
+                                    @foreach ($day as $d)
+                                        <td>
+                                            @if ($d != null)
+                                                <div class="btn-group-vertical mr-2">
+                                                    <input type="hidden" id="status-{{ $d['day'] }}"
+                                                        name="{{ $month }}-{{ $d['day'] }}"
+                                                        @if ($d['shift']) value="{{ $d['shift'] }}" 
+                                                    @else
+                                                    value="" @endif />
 
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        disabled>{{ $d['day'] }}</button>
+                                                    <button id="wd-{{ $d['day'] }}" type="button"
+                                                        @if ($d['shift'] == 'wd') class="btn btn-success"
+                                                        @else
+                                                        class="btn btn-outline-success" @endif
+                                                        onclick="scheduleWorkDay({{ $d['day'] }})">WD</button>
+                                                    <button id="od-{{ $d['day'] }}" type="button"
+                                                        @if ($d['shift'] == 'od') class="btn btn-danger"
+                                                        @else
+                                                        class="btn btn-outline-danger" @endif
+                                                        class="btn btn-outline-danger"
+                                                        onclick="scheduleOffDay({{ $d['day'] }})">OD</button>
+                                                </div>
+                                            @endif
+                                        </td>
+                                    @endforeach
 
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="btn-group-vertical mr-2">
-                                    <input type="hidden" id="status" name="" value="" />
-                                    <button type="button" class="btn btn-outline-secondary" disabled>1</button>
-                                    <button id="day" type="button" class="btn btn-outline-success"
-                                        {{-- onclick="scheduleDay({{ $d }})" --}}>WD</button>
-                                    <button id="night" type="button" class="btn btn-outline-danger"
-                                        {{-- onclick="scheduleNight({{ $d }})" --}}>OD</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="row container">
-            <h5 class="mt-4 mb-4 is-valid">Enginnering Schedule</h5>
-            <div>
-                <div class="container row">
-                    <div class="col-md-2 mb-4">
-                        <fieldset class="form-group shadow">
-                            <select class="form-select" id="basicSelect">
-                                <option>Select Week</option>
-                                <option>First Week</option>
-                                <option>Second Week</option>
-                            </select>
-                        </fieldset>
-                    </div>
+            <div class="row container">
+                <h5 class="mt-4 mb-4 is-valid">Enginnering Schedule</h5>
+                <div>
+                    <div class="container row">
+                        <div class="col-md-2 mb-4">
+                            <fieldset class="form-group shadow">
+                                <select class="form-select" id="weekDropDown" onchange="hideAndShowWeekModal()">
+                                    @foreach ($noOfWeeks as $key => $nw)
+                                        <option value="{{ $key + 1 }}">
+                                            {{ $nw['name'] }}
+                                        </option>
+                                    @endforeach
 
-                    <div class="col-md-2 mb-4">
-                        <fieldset class="form-group shadow">
-                            <select class="form-select" id="basicSelect">
-                                <option>January</option>
-                                <option>Febuary</option>
-                                <option>March</option>
-                            </select>
-                        </fieldset>
-                    </div>
+                                            {{-- <a class="nav-link" data-bs-toggle="tab" href="#week-{{ $key }}"
+                                                role="tab" aria-controls="operators-tab" aria-selected="true"></a> --}}
+                                </select>
+                            </fieldset>
+                        </div>
 
-                    <div class="col-md-2 mb-4">
-                        <fieldset class="form-group shadow">
-                            <select class="form-select" id="basicSelect">
-                                <option>2021</option>
-                                <option>2022</option>
-                                <option>2023</option>
-                            </select>
-                        </fieldset>
-                    </div>
+                        <div class="col-md-8 mb-4">
+                        </div>
 
-                    <div class="col-md-4">
-                        {{-- space inbetween --}}
-                    </div>
+                        <div class="col-md-2">
+                            <button class='btn btn-success pl-4 pr-4' disabled>ON</button>
+                            <button class='btn btn-danger pl-4 pr-4' disabled>OFF</button>
 
-                    <div class="col-md-2">
-                        <button class='btn btn-success pl-4 pr-4' disabled>ON</button>
-                        <button class='btn btn-danger pl-4 pr-4' disabled>OFF</button>
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row container mb-4">
-            <div class="table-responsive">
-                <table class="table mb-0">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Mon<br>3rd Jan</th>
-                            <th>Tue<br>3rd Jan</th>
-                            <th>Wed<br>3rd Jan</th>
-                            <th>Thu<br>3rd Jan</th>
-                            <th>Fri<br>3rd Jan</th>
-                            <th>Sat<br>3rd Jan</th>
-                            <th>Sun<br>3rd Jan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                            <td class="text-bold-500">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <button class='btn btn-outline-success pl-4 pr-4'>ON</button>
-                                <button class='btn btn-outline-danger pl-4 pr-4'>OFF</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row container mb-4">
+                    @if ($days[0])
+                        <div class="d-block mt-4" id="week-1">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            @foreach ($days[0] as $d)
+                                                <th>
+                                                    @if ($d != null)
+                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                    @endif
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($days[0] as $d)
+                                                <td class="text-bold-500">
+                                                    @if ($d != null)
+                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                            name="engineering-status-{{ $d['day'] }}" />
+                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
+                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
+                                                            id="on-{{ $d['day'] }}"
+                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
+                                                            id="off-{{ $d['day'] }}"
+                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                    @endif
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($days[1])
+                        <div class="d-none  mt-4" id="week-2">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            @foreach ($days[1] as $d)
+                                                <th>
+                                                    @if ($d != null)
+                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                    @endif
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($days[1] as $d)
+                                                <td class="text-bold-500">
+                                                    @if ($d != null)
+                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                            name="engineering-status-{{ $d['day'] }}" />
+                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
+                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
+                                                            id="on-{{ $d['day'] }}"
+                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
+                                                            id="off-{{ $d['day'] }}"
+                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                    @endif
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+
+                    @if ($days[2])
+                        <div class="d-none mt-4" id="week-3">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            @foreach ($days[2] as $d)
+                                                <th>
+                                                    @if ($d != null)
+                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                    @endif
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($days[2] as $d)
+                                                <td class="text-bold-500">
+                                                    @if ($d != null)
+                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                            name="engineering-status-{{ $d['day'] }}" />
+                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
+                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
+                                                            id="on-{{ $d['day'] }}"
+                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
+                                                            id="off-{{ $d['day'] }}"
+                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                    @endif
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($days[3])
+                        <div class="d-none mt-4" id="week-4">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            @foreach ($days[3] as $d)
+                                                <th>
+                                                    @if ($d != null)
+                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                    @endif
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($days[3] as $d)
+                                                <td class="text-bold-500">
+                                                    @if ($d != null)
+                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                            name="engineering-status-{{ $d['day'] }}" />
+                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
+                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
+                                                            id="on-{{ $d['day'] }}"
+                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
+                                                            id="off-{{ $d['day'] }}"
+                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                    @endif
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($days[4])
+                        <div class="d-none mt-4" id="week-5" >
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            @foreach ($days[4] as $d)
+                                                <th>
+                                                    @if ($d != null)
+                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                    @endif
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($days[4] as $d)
+                                                <td class="text-bold-500">
+                                                    @if ($d != null)
+                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                            name="engineering-status-{{ $d['day'] }}" />
+                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
+                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
+                                                            id="on-{{ $d['day'] }}"
+                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
+                                                            id="off-{{ $d['day'] }}"
+                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                    @endif
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+
+
             </div>
-        </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="form-group row align-items-center">
+                        <div class="col-lg-10 col-10">
+                        </div>
+                        <div class="col-lg-2 col-2">
+                            <button class='btn btn-success pl-4 pr-4'>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
     </section>
 @endsection

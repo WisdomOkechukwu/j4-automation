@@ -10,15 +10,17 @@ use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {
-    public function allSchedules(){
-        return view('admin.all_schedules');
-    }
+    public function allSchedules()
+    {
+        $users = User::with('role')
+            ->whereNot('role_id', 999)
+            ->get();
+        
 
-    public function scheduleOperator(){
-        return view('admin.schedule_operator');
-    }
+        $operators = $users->where('role_id', 889);
+        $fieldAdmin = $users->where('role_id', 779);
+        $fieldWorker = $users->where('role_id', 777);
 
-    public function scheduleFieldWorker(){
-        return view('admin.schedule_field_worker');
+        return view('admin.all_schedules', compact(['operators', 'fieldAdmin', 'fieldWorker','users']));
     }
 }

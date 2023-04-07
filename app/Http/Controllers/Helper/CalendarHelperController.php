@@ -8,40 +8,30 @@ use Illuminate\Http\Request;
 
 class CalendarHelperController extends Controller
 {
-    private $month;
-    private $year;
-
-    public function __construct($month, $year)
-    {
-        $this->month = $month;
-        $this->year = $year;
-    }
-    public function dumpLoader(){
-        // if(count($request->all()) > 0){
-        //     self::handleCalendarRequest($request);
-        // }
-        $month = $this->month;
-        $year = $this->year;
-        $firstDayOfTheMonth = "$year-$month-01";
-
-        $daysOfTheWeek = date('w', strtotime($firstDayOfTheMonth));
-        $days = array();
-
-        for ($i=1; $i < $daysOfTheWeek ; $i++) { 
-            $days [] = NULL;
+    public static function calendarGenerator(){
+        $arrayYears = array(); // this is to get the last 10 years from the current year
+        for($i = 0; $i <= 5; $i++){
+            $year = now()->subYear($i)->year;
+            array_push($arrayYears,$year);
         }
+        $years = $arrayYears;
 
-        $numberOfDays = date('t', strtotime($firstDayOfTheMonth));
-        for($i = 1; $i <= $numberOfDays ; $i++) {
-            $days[] = $i;
-        }
-
-        $days = collect($days)->chunk(7);
-        // dd($days);
-
-        return view('aatester.test',compact(['days', 'month']));
+        $month = [
+            ['month'=>'January','number'=>1],
+            ['month'=>'February','number'=>2],
+            ['month'=>'March','number'=>3],
+            ['month'=>'April','number'=>4],
+            ['month'=>'May','number'=>5],
+            ['month'=>'June','number'=>6],
+            ['month'=>'July','number'=>7],
+            ['month'=>'August','number'=>8],
+            ['month'=>'September','number'=>9],
+            ['month'=>'October','number'=>10],
+            ['month'=>'November','number'=>11],
+            ['month'=>'December','number'=>12],
+        ];
+        return [$years , $month];
     }
-
     public function handleCalendarRequest($request){
         $monthQuery = $request->all();
         dd($monthQuery);
@@ -51,26 +41,6 @@ class CalendarHelperController extends Controller
             $day = Carbon::parse("2023-".$key);
             dd($day->format('Y M d'), $mq);
         }
-    }
-
-    public function loadWorkersCalendar(){
-
-    }
-
-    public function loadFieldWorkerAdminCalendar(){
-
-    }
-
-    public function loadFieldOperatorCalendar(){
-
-    }
-
-    public function saveFieldWorkerAdminCalendar(array $calendarArray){
-
-    }
-
-    public function saveFieldOperatorCalendar(array $calendarArray){
-
     }
 
     

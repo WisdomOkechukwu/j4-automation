@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('operator_schedules', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('user_id');
+        Schema::table('meal_tickets', function (Blueprint $table) {
             $table->timestamp('date', 0)->nullable();
-            $table->string('shift')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('operator_schedules');
+        Schema::table('meal_tickets', function (Blueprint $table) {
+            $table->dropColumn('date');
+        });
     }
 };
