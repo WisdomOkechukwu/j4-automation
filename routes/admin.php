@@ -29,7 +29,7 @@ Route::GET('/field-worker-overview', [FieldWorkersTrackingsOverviewController::c
 
 Route::GET('/users', [UsersController::class,'allUsers'])->name('admin.users');
 
-Route::GET('/user-profile', [UsersController::class,'userProfile'])->name('admin.user-profile');
+Route::GET('/user-profile', [UserProfileController::class,'userProfile'])->name('admin.user-profile');
 
 Route::GET('/user-message', [UsersController::class,'userMessage'])->name('admin.user-message');
 

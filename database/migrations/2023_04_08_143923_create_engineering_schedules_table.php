@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('field_worker_schedules', function (Blueprint $table) {
+        Schema::create('engineering_schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->timestamp('date', 0)->nullable();
-            $table->string('shift')->nullable();
+            $table->string('is_meal',7)->nullable();
+            $table->longText('meal_name')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('field_worker_schedules');
+        Schema::dropIfExists('engineering_schedules');
     }
 };

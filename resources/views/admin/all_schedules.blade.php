@@ -65,7 +65,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade active mt-4 d-none" id="operators" role="tabpanel"
+                            <div class="tab-pane fade mt-4" id="operators" role="tabpanel"
                                 aria-labelledby="operators">
                                 <div class="table-responsive">
                                     <table class="table table-lg users-table-operators">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade active mt-4 d-none" id="field-admin" role="tabpanel"
+                            <div class="tab-pane fade mt-4" id="field-admin" role="tabpanel"
                                 aria-labelledby="field-admin">
                                 <div class="table-responsive">
                                     <table class="table table-lg users-table-field-admin">
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade active mt-4 d-none" id="field-worker" role="tabpanel"
+                            <div class="tab-pane fade mt-4" id="field-worker" role="tabpanel"
                                 aria-labelledby="field-worker">
                                 <div class="table-responsive">
                                     <table class="table table-lg users-table-field-worker">

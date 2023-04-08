@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BulkMessages extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

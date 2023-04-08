@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\CalendarHelperController;
+use App\Models\EngineeringSchedule;
 use App\Models\FieldWorkerSchedule;
 use App\Models\User;
 use Carbon\Carbon;
@@ -21,22 +22,77 @@ class ScheduleFieldController extends Controller
         $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
         $endOfMonth = $startOfMonth->copy()->endOfMonth();
 
+        $daysInAMonth = $startOfMonth->copy()->daysInMonth;
         $segment = $startOfMonth->format('F Y');
 
         $days = $this->generateFieldWorkerCalendar($month, $year, $user);
-        // dd($days);
 
         $calendar = CalendarHelperController::calendarGenerator();
         $months = $calendar[1];
         $years = $calendar[0];
 
         $noOfWeeks = $this->noOfWeeks($days);
-        return view('admin.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks']));
+        return view('admin.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
     }
 
     public function scheduleFieldWorkerAction(Request $request)
     {
-        dd($request->all());
+        $count = $request->days_no;
+        $year = $request->year;
+        $month = $request->month;
+
+        $scheduleData = $request->except('_token', 'month', 'year', 'user', 'days_no');
+        $mealData = array_slice($scheduleData, $count);
+
+        foreach (array_chunk($mealData, 2, 'true') as $key => $value) {
+            $day = $key + 1;
+            $engineering_status = $value['engineering_status_' . $day];
+            $meal_data = $value['meal_data_' . $day];
+
+            $scheduleDate = Carbon::parse($year . '-' . $month . '-' . $day);
+
+            $engineeringSchedule = EngineeringSchedule::where('user_id', $request->user)
+                ->whereDate('date', $scheduleDate)
+                ->first();
+
+            if ($engineeringSchedule) {
+                $engineeringSchedule->update([
+                    'is_meal' => $engineering_status,
+                    'meal_name' => $meal_data,
+                ]);
+            } else {
+                $engineeringSchedule = new EngineeringSchedule();
+                $engineeringSchedule->is_meal = $engineering_status;
+                $engineeringSchedule->meal_name = $meal_data;
+                $engineeringSchedule->date = $scheduleDate;
+                $engineeringSchedule->user_id = $request->user;
+                $engineeringSchedule->save();
+            }
+        }
+
+        $dateSchedule = array_diff_key($scheduleData, $mealData);
+
+        foreach ($dateSchedule as $day => $value) {
+            $scheduleDate = Carbon::parse($year . '-' . $day);
+
+            $fieldWorkerSchedule = FieldWorkerSchedule::where('user_id', $request->user)
+                ->whereDate('date', $scheduleDate)
+                ->first();
+
+            if ($fieldWorkerSchedule) {
+                $fieldWorkerSchedule->update([
+                    'shift' => $value,
+                ]);
+            } else {
+                $fieldWorkerSchedule = new FieldWorkerSchedule();
+                $fieldWorkerSchedule->shift = $value;
+                $fieldWorkerSchedule->date = $scheduleDate;
+                $fieldWorkerSchedule->user_id = $request->user;
+                $fieldWorkerSchedule->save();
+            }
+        }
+
+        return back()->with('success', 'Data Saved Successfully');
     }
 
     public function generateFieldWorkerCalendar($month, $year, $user)
@@ -48,6 +104,11 @@ class ScheduleFieldController extends Controller
 
         // check schedule
         $fieldWorkerSchedule = FieldWorkerSchedule::where('user_id', $user->id)
+            ->where('date', '>=', $startOfMonth)
+            ->where('date', '<=', $endOfMonth)
+            ->get();
+
+        $engineeringSchedule = EngineeringSchedule::where('user_id', $user->id)
             ->where('date', '>=', $startOfMonth)
             ->where('date', '<=', $endOfMonth)
             ->get();
@@ -70,14 +131,19 @@ class ScheduleFieldController extends Controller
                 ->where('date', '<=', $endOfDay)
                 ->first();
 
+            $todaysEngineeringSchedule = $engineeringSchedule
+                ->where('date', '>=', $startOfDay)
+                ->where('date', '<=', $endOfDay)
+                ->first();
+
             //Operators Schedule
             $operatorData[] = [
                 'day' => $i,
                 'date' => $day->format('jS M'),
                 'weekday' => $day->format('l'),
                 'shift' => $todaysSchedule ? $todaysSchedule->shift : null,
-                'is_meal' => $todaysSchedule ? $todaysSchedule->is_meal : 0,
-                'meal_name' => $todaysSchedule ? $todaysSchedule->meal_name : null,
+                'is_meal' => $todaysEngineeringSchedule ? $todaysEngineeringSchedule->is_meal : 0,
+                'meal_name' => $todaysEngineeringSchedule ? $todaysEngineeringSchedule->meal_name : null,
             ];
         }
 

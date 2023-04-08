@@ -11,9 +11,6 @@ class UsersController extends Controller
         return view('admin.users');
     }
 
-    public function userProfile(){
-        return view('admin.user_profile');
-    }
 
     public function userMessage(){
         return view('admin.user_message');

@@ -94,6 +94,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <input type="hidden" name="month" value="{{ $month }}" />
+                    <input type="hidden" name="year" value="{{ $year }}" />
+                    <input type="hidden" name="user" value="{{ $user->id }}" />
+                    <input type="hidden" name="days_no" value="{{ $daysInAMonth }}" />
                 </div>
             </div>
 
@@ -110,7 +114,7 @@
                                         </option>
                                     @endforeach
 
-                                            {{-- <a class="nav-link" data-bs-toggle="tab" href="#week-{{ $key }}"
+                                    {{-- <a class="nav-link" data-bs-toggle="tab" href="#week-{{ $key }}"
                                                 role="tab" aria-controls="operators-tab" aria-selected="true"></a> --}}
                                 </select>
                             </fieldset>
@@ -129,201 +133,256 @@
             </div>
 
             <div class="row container mb-4">
-                    @if ($days[0])
-                        <div class="d-block mt-4" id="week-1">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            @foreach ($days[0] as $d)
-                                                <th>
-                                                    @if ($d != null)
-                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
-                                                    @endif
-                                                </th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @foreach ($days[0] as $d)
-                                                <td class="text-bold-500">
-                                                    @if ($d != null)
-                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
-                                                            name="engineering-status-{{ $d['day'] }}" />
-                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
-                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
-                                                            id="on-{{ $d['day'] }}"
-                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
-                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
-                                                            id="off-{{ $d['day'] }}"
-                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
+                @if ($days[0])
+                    <div class="d-block mt-4" id="week-1">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @foreach ($days[0] as $d)
+                                            <th>
+                                                @if ($d != null)
+                                                    {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                @endif
+                                            </th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach ($days[0] as $d)
+                                            <td class="text-bold-500">
+                                                @if ($d != null)
+                                                    <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                        name="engineering_status_{{ $d['day'] }}"
+                                                        @if ($d['is_meal']) value="{{ $d['is_meal'] }}" 
+                                                        @else
+                                                        value="" @endif />
 
-                    @if ($days[1])
-                        <div class="d-none  mt-4" id="week-2">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            @foreach ($days[1] as $d)
-                                                <th>
-                                                    @if ($d != null)
-                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
-                                                    @endif
-                                                </th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @foreach ($days[1] as $d)
-                                                <td class="text-bold-500">
-                                                    @if ($d != null)
-                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
-                                                            name="engineering-status-{{ $d['day'] }}" />
-                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
-                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
-                                                            id="on-{{ $d['day'] }}"
-                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
-                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
-                                                            id="off-{{ $d['day'] }}"
-                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    <textarea class="form-control mb-2" name="meal_data_{{ $d['day'] }}" rows="3">@if ($d['meal_name']) {{ trim($d['meal_name']) }} @endif </textarea>
+
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'on') class="btn btn-success pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-success pl-4 pr-4" @endif
+                                                        id="on-{{ $d['day'] }}"
+                                                        onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'off') class="btn btn-danger pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-danger pl-4 pr-4" @endif
+                                                        id="off-{{ $d['day'] }}"
+                                                        onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    @endif
+                    </div>
+                @endif
+
+                @if ($days[1])
+                    <div class="d-none  mt-4" id="week-2">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @foreach ($days[1] as $d)
+                                            <th>
+                                                @if ($d != null)
+                                                    {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                @endif
+                                            </th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach ($days[1] as $d)
+                                            <td class="text-bold-500">
+                                                @if ($d != null)
+                                                    <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                        name="engineering_status_{{ $d['day'] }}"
+                                                        @if ($d['is_meal']) value="{{ $d['is_meal'] }}" 
+                                                        @else
+                                                        value="" @endif />
+
+                                                    <textarea class="form-control mb-2" name="meal_data_{{ $d['day'] }}" rows="3">@if ($d['meal_name']) {{ trim($d['meal_name']) }} @endif </textarea>
+
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'on') class="btn btn-success pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-success pl-4 pr-4" @endif
+                                                        id="on-{{ $d['day'] }}"
+                                                        onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'off') class="btn btn-danger pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-danger pl-4 pr-4" @endif
+                                                        id="off-{{ $d['day'] }}"
+                                                        onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
 
 
-                    @if ($days[2])
-                        <div class="d-none mt-4" id="week-3">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            @foreach ($days[2] as $d)
-                                                <th>
-                                                    @if ($d != null)
-                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
-                                                    @endif
-                                                </th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @foreach ($days[2] as $d)
-                                                <td class="text-bold-500">
-                                                    @if ($d != null)
-                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
-                                                            name="engineering-status-{{ $d['day'] }}" />
-                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
-                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
-                                                            id="on-{{ $d['day'] }}"
-                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
-                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
-                                                            id="off-{{ $d['day'] }}"
-                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
+                @if ($days[2])
+                    <div class="d-none mt-4" id="week-3">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @foreach ($days[2] as $d)
+                                            <th>
+                                                @if ($d != null)
+                                                    {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                @endif
+                                            </th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach ($days[2] as $d)
+                                            <td class="text-bold-500">
+                                                @if ($d != null)
+                                                    <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                        name="engineering_status_{{ $d['day'] }}"
+                                                        @if ($d['is_meal']) value="{{ $d['is_meal'] }}" 
+                                                        @else
+                                                        value="" @endif />
 
-                    @if ($days[3])
-                        <div class="d-none mt-4" id="week-4">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            @foreach ($days[3] as $d)
-                                                <th>
-                                                    @if ($d != null)
-                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
-                                                    @endif
-                                                </th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @foreach ($days[3] as $d)
-                                                <td class="text-bold-500">
-                                                    @if ($d != null)
-                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
-                                                            name="engineering-status-{{ $d['day'] }}" />
-                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
-                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
-                                                            id="on-{{ $d['day'] }}"
-                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
-                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
-                                                            id="off-{{ $d['day'] }}"
-                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
+                                                    <textarea class="form-control mb-2" name="meal_data_{{ $d['day'] }}" rows="3">@if ($d['meal_name']) {{ trim($d['meal_name']) }} @endif </textarea>
 
-                    @if ($days[4])
-                        <div class="d-none mt-4" id="week-5" >
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            @foreach ($days[4] as $d)
-                                                <th>
-                                                    @if ($d != null)
-                                                        {{ $d['weekday'] }}<br>{{ $d['date'] }}
-                                                    @endif
-                                                </th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @foreach ($days[4] as $d)
-                                                <td class="text-bold-500">
-                                                    @if ($d != null)
-                                                        <input type='hidden' id="engineering-status-{{ $d['day'] }}"
-                                                            name="engineering-status-{{ $d['day'] }}" />
-                                                        <textarea class="form-control mb-2" name="meal-data-{{ $d['day'] }}" rows="3"></textarea>
-                                                        <button type='button' class='btn btn-outline-success pl-4 pr-4'
-                                                            id="on-{{ $d['day'] }}"
-                                                            onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
-                                                        <button type='button' class='btn btn-outline-danger pl-4 pr-4'
-                                                            id="off-{{ $d['day'] }}"
-                                                            onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'on') class="btn btn-success pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-success pl-4 pr-4" @endif
+                                                        id="on-{{ $d['day'] }}"
+                                                        onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'off') class="btn btn-danger pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-danger pl-4 pr-4" @endif
+                                                        id="off-{{ $d['day'] }}"
+                                                        onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    @endif
+                    </div>
+                @endif
+
+                @if ($days[3])
+                    <div class="d-none mt-4" id="week-4">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @foreach ($days[3] as $d)
+                                            <th>
+                                                @if ($d != null)
+                                                    {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                @endif
+                                            </th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach ($days[3] as $d)
+                                            <td class="text-bold-500">
+                                                @if ($d != null)
+                                                    <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                        name="engineering_status_{{ $d['day'] }}"
+                                                        @if ($d['is_meal']) value="{{ $d['is_meal'] }}" 
+                                                        @else
+                                                        value="" @endif />
+
+                                                    <textarea class="form-control mb-2" name="meal_data_{{ $d['day'] }}" rows="3">@if ($d['meal_name']) {{ trim($d['meal_name']) }} @endif </textarea>
+
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'on') class="btn btn-success pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-success pl-4 pr-4" @endif
+                                                        id="on-{{ $d['day'] }}"
+                                                        onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'off') class="btn btn-danger pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-danger pl-4 pr-4" @endif
+                                                        id="off-{{ $d['day'] }}"
+                                                        onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($days[4])
+                    <div class="d-none mt-4" id="week-5">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        @foreach ($days[4] as $d)
+                                            <th>
+                                                @if ($d != null)
+                                                    {{ $d['weekday'] }}<br>{{ $d['date'] }}
+                                                @endif
+                                            </th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach ($days[4] as $d)
+                                            <td class="text-bold-500">
+                                                @if ($d != null)
+                                                    <input type='hidden' id="engineering-status-{{ $d['day'] }}"
+                                                        name="engineering_status_{{ $d['day'] }}"
+                                                        @if ($d['is_meal']) value="{{ $d['is_meal'] }}" 
+                                                        @else
+                                                        value="" @endif />
+
+                                                    <textarea class="form-control mb-2" name="meal_data_{{ $d['day'] }}" rows="3">@if ($d['meal_name']) {{ trim($d['meal_name']) }} @endif </textarea>
+
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'on') class="btn btn-success pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-success pl-4 pr-4" @endif
+                                                        id="on-{{ $d['day'] }}"
+                                                        onclick="selectOnEngineeringSchedule({{ $d['day'] }})">ON</button>
+                                                    <button type='button'
+                                                        @if ($d['is_meal'] == 'off') class="btn btn-danger pl-4 pr-4"
+                                                        @else
+                                                        class=" btn btn-outline-danger pl-4 pr-4" @endif
+                                                        id="off-{{ $d['day'] }}"
+                                                        onclick="selectOffEngineeringSchedule({{ $d['day'] }})">OFF</button>
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
 
 
 

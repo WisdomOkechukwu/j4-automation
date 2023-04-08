@@ -11,7 +11,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                                    aria-controls="home" aria-selected="true">All(24)</a>
+                                    aria-controls="home" aria-selected="true">All({{ $users->count() }})</a>
                             </li>
                             {{-- <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
@@ -179,7 +179,7 @@
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
-                </div>=
+                </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
