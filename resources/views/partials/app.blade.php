@@ -135,7 +135,6 @@
 
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/customFilePond.js') }}"></script>
     <script src="{{ asset('assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/extensions/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>

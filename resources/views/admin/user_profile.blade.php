@@ -229,6 +229,6 @@
 
         <!-- filepond -->
         <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-        <script src="{{ asset('assets/js/UserFormValidation.js') }}"></script>
+        <script src="{{ asset('assets/js/customFilePond.js') }}"></script>
     </div>
 @endsection
