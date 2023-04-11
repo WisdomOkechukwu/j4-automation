@@ -3,11 +3,13 @@
 use App\Http\Controllers\Admin\FieldWorkersTrackingsOverviewController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\LeaveTrackerController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\OperatorsScheduleOverviewController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ScheduleFieldController;
 use App\Http\Controllers\Admin\ScheduleOperatorController;
 use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +31,21 @@ Route::GET('/field-worker-overview', [FieldWorkersTrackingsOverviewController::c
 
 Route::GET('/users', [UsersController::class,'allUsers'])->name('admin.users');
 
+Route::GET('/messages', [MessageController::class,'userMessage'])->name('admin.messages');
+
+Route::GET('/read-message/{id}', [MessageController::class,'readMessage']);
+
 Route::GET('/user-profile', [UserProfileController::class,'userProfile'])->name('admin.user-profile');
 
-Route::GET('/user-message', [UsersController::class,'userMessage'])->name('admin.user-message');
+Route::GET('/staff-profile/{user}', [UserProfileController::class,'staffProfile'])->name('admin.staff-profile');
+
+Route::POST('/staff-profile-update', [UserProfileController::class,'updateStaffProfile'])->name('admin.staff-profile.update');
+
+Route::POST('/upload-dp', [UserProfileController::class,'uploadDp'])->name('admin.upload-dp');
+
+Route::POST('/user-message', [MessageController::class,'handleSingleMessage'])->name('admin.user-message');
+
+Route::POST('/bulk-message', [MessageController::class,'handleBulkMessage'])->name('admin.bulk-message');
 
 Route::GET('/assign-tickets', [TicketController::class,'assignTicket'])->name('admin.assign.tickets');
 

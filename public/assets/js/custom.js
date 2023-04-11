@@ -3,8 +3,6 @@
         let dataTable = new simpleDatatables.DataTable(table);
     } 
 
-
-
     function generateScheduleTable(value){
         generateTable(value);
     } 
@@ -172,6 +170,58 @@
         $('#single-user-id').val(JSON.stringify(user));
         // $('#single-user-id').val(user);
         $('#user-modal-title').html(`${user.first_name} ${user.last_name} Meal Ticket Information`)
+    }
+
+    function bulkAssignAdmin(users, option){
+        users = Object.values(users);
+
+        if($(`#check-${option}`).is(':checked')){
+            users.map( user => {
+                $(`#checkbox-${user.id}-${option}`).click();
+            })
+        } else {
+            users.map( user => {
+                $(`#checkbox-${user.id}-${option}`).click();
+            })
+        }
+    }
+
+    function bulkMessageModal(){
+        var dropdownValue = $('#bulk-action-dropdown').val();
+        if(dropdownValue == "bulk-message"){
+            $('#bulk-assign-modal').modal('show');
+        }
+        
+    }
+
+    function bulkMessageSendForm(){
+        // console.log($('#bulk-subject-header').val(),  $('#bulk-body').val());
+        $('#bulk-subject').val($('#bulk-subject-header').val());
+        $('#bulk-message').val($('#bulk-body').val());
+
+        $('#bulk-message-form').submit();
+    }
+
+    function sendSingleMessage(user){
+        $('#single-user-id').val(JSON.stringify(user));
+        // $('#single-user-id').val(user);
+        $('#single-header').html(`send message to${user.first_name} ${user.last_name}`);
+    }
+
+    function setReadMessageData(id){
+        var messageCount = $(`#message-list-count`).text();
+
+        $.get(`/admin/read-message/${id}`, function(data){
+            if(data.success === true){
+                $(`#new-message-tag-${id}`).addClass('d-none');
+
+                var totalMessages = messageCount - 1;
+                if(totalMessages == 0){
+                    $(`#message-list-count`).addClass('d-none');
+                }
+                $(`#message-list-count`).text(totalMessages);
+            }
+          });
     }
     // $(selector).submit(function)  
 

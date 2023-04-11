@@ -1,37 +1,136 @@
 @extends('partials.app')
 @section('content')
     <div class="card mb-4">
-        <h5 class="card-header">Profile</h5>
-        <hr class="mb-4" />
-        <div class="card-body">
-            <form id="formAccountSettings" method="POST" onsubmit="return false">
-                <div class="row">
-                    <div class="mb-3 col-md-2">
-                        <img src="{{ asset('assets/images/faces/1.jpg') }}" alt="user-avatar" class="d-block rounded"
-                            height="100" width="100" id="uploadedAvatar" />
+        {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">My Messages</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#inbox" role="tab"
+                                aria-controls="profile" aria-selected="false">
+                                Inbox({{ $receivedMessages->count() }})</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#sent" role="tab"
+                                aria-controls="home" aria-selected="true">Sent({{ $sentMessages->count() }})</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade mt-4" id="sent" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            @foreach ($sentMessages as $message)
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <div class="accordion-button bg-light shadow" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#sent-{{ $message->id }}"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                                <div class="pr-50 m-4 mt-0 mb-0 ml-0">
+                                                    <div class="avatar">
+                                                        <img src="{{ asset('assets/images/faces/1.jpg') }}"
+                                                            alt="avatar avatar-xl me-3">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="user-details">
+                                                        <div class="mail-items">
+                                                            <h5 class="list-group-item-text text-truncate">
+                                                                {{ $message->receiver->full_name }}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mail-message">
+                                                        <p class="list-group-item-text truncate mb-0 h6">
+                                                            {{ $message->title }}
+                                                            <br>{{ $message->created_at->format('d M, h:ia') }}
+                                                        </p>
+                                                        <div class="mail-meta-item">
+                                                            <span class="float-right">
+                                                                <span class="bullet bullet-success bullet-sm"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </h2>
+                                    <div id="sent-{{ $message->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{ $message->message }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="tab-pane fade show active mt-4" id="inbox" role="tabpanel" aria-labelledby="home-tab">
+                            @foreach ($receivedMessages as $message)
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <div class="accordion-button bg-light shadow" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#inbox-{{ $message->id }}"
+                                                aria-expanded="true" aria-controls="collapseOne"
+                                                @if ($message->is_read == 0) onclick = "setReadMessageData({{ $message->id }})" @endif>
+                                                <div class="pr-50 m-4 mt-0 mb-0 ml-0">
+                                                    <div class="avatar">
+                                                        <img src="{{ asset('assets/images/faces/1.jpg') }}"
+                                                            alt="avatar avatar-xl me-3">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="user-details">
+                                                        <div class="mail-items">
+                                                            <h5 class="list-group-item-text text-truncate">
+                                                                {{ $message->sender->full_name }}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mail-message">
+                                                        <p class="list-group-item-text truncate mb-0 h6">
+                                                            {{ $message->title }}
+                                                            <br>{{ $message->created_at->format('d M, h:ia') }}
+                                                            <br>
+                                                            @if ($message->is_read == 0)
+                                                                <span id="new-message-tag-{{ $message->id }}"
+                                                                    class="badge bg-danger">New</span>
+                                                            @endif
+                                                        </p>
+                                                        <div class="mail-meta-item">
+                                                            <span class="float-right">
+                                                                <span class="bullet bullet-success bullet-sm"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </h2>
+                                    <div id="inbox-{{ $message->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{ $message->message }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="mb-3 col-md-10">
-                        <label for="firstName" class="form-label ">First Name</label>
-                        <input class="form-control" type="text" id="firstName" name="firstName" value="John"
-                            autofocus />
-                        <label for="lastName" class="form-label mt-3">Last Name</label>
-                        <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
-                    </div>
-                    <h5 class="card-header">Message User</h5>
-                    <div class="mb-3 col-md-12">
-                        <label for="email" class="form-label">Message</label>
-                        <input class="form-control" type="text" id="email" name="email" {{-- value="john.doe@example.com" --}}
-                            placeholder="Message Subject" />
-                    </div>
-                    <div class="mb-3 col-md-12">
-                        <textarea class="form-control" name="" id="" rows="6"></textarea>
+
+                    <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="profile-tab">
                     </div>
                 </div>
-                <div class="mt-2 ">
-                    <button type="submit" class="btn btn-primary me-2">Send Message</button>
-                </div>
-            </form>
+
+            </div>
         </div>
-        <!-- /Account -->
+    </div>
+    <!-- /Account -->
     </div>
 @endsection

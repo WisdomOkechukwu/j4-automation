@@ -18,16 +18,19 @@
 
         
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.user-message' ? 'active' : '' }}  ">
-            <a href="{{ route('admin.user-message') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.messages' ? 'active' : '' }}  ">
+            <a href="{{ route('admin.messages') }}" class='sidebar-link'>
                 <i class="bi bi-chat-left-text-fill"></i>
-                <span>Messages</span> 
+                <span>Messages </span> 
+                @if(Auth::user()->messages->where('is_read', 0)->count() != 0)
+                <span id="message-list-count" class="badge bg-danger">{{ Auth::user()->messages->where('is_read', 0)->count() }}</span>
+                @endif
                 {{-- Rework --}}
             </a>
         </li>
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.user-message' ? 'active' : '' }}  ">
-            <a href="{{ route('admin.user-message') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.user-profile' ? 'active' : '' }}  ">
+            <a href="{{ route('admin.user-profile') }}" class='sidebar-link'>
                 <i class="bi bi-person-circle"></i>
                 <span>My Profile</span> 
                 {{-- Rework --}}
