@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin.index');
+    return redirect()->route('login');
 });
 
 Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name('login');
