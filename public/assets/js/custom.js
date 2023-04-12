@@ -221,38 +221,6 @@
           });
     }
 
-    function sortFieldWorkerOverview(){
-        var monthDropdownValue = $('#month_dropdown').val();
-        var yearDropdownValue = $('#year_dropdown').val();
 
-        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
-            var redirect = `/admin/field-worker-overview/${monthDropdownValue}/${yearDropdownValue}`;
-            window.location.href = redirect;
-        }
-    }
-
-    function fieldWorkerOverviewWeeks(){
-        var  weekArray = [1,2,3,4,5];
-        var dropdownValue = $('#weekDropDown').val();
-
-        weekArray.map( arrayData => {
-            if(dropdownValue != arrayData){
-                $('#week-no-'+arrayData).removeClass('d-block').addClass('d-none');
-            }
-        })
-
-        $('#week-no-'+dropdownValue).removeClass('d-none').addClass('d-block');
-
-    } 
-
-    function sortOperatorOverview(){
-        var monthDropdownValue = $('#month_dropdown').val();
-        var yearDropdownValue = $('#year_dropdown').val();
-
-        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
-            var redirect = `/admin/operator-overview/${monthDropdownValue}/${yearDropdownValue}`;
-            window.location.href = redirect;
-        }
-    }
 
 
