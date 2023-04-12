@@ -13,16 +13,13 @@
                                 {{ $nw['name'] }}
                             </option>
                         @endforeach
-
-                        {{-- <a class="nav-link" data-bs-toggle="tab" href="#week-{{ $key }}"
-                                                role="tab" aria-controls="operators-tab" aria-selected="true"></a> --}}
                     </select>
                 </fieldset>
             </div>
 
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
-                    <select name class="form-select" id="month_dropdown" onchange="sortFieldWorkerOverview()">
+                    <select name class="form-select" id="month_dropdown" onchange="sortOperatorOverview()">
                         <option value="noData">Select Month</option>
                         @foreach ($months as $ms)
                             <option value="{{ $ms['number'] }}">{{ $ms['month'] }}</option>
@@ -33,7 +30,7 @@
 
             <div class="col-md-2 mb-4">
                 <fieldset class="form-group shadow">
-                    <select class="form-select" id="year_dropdown" onchange="sortFieldWorkerOverview()">
+                    <select class="form-select" id="year_dropdown" onchange="sortOperatorOverview()">
                         <option value="noData">Select Year</option>
                         @foreach ($years as $ys)
                             <option value="{{ $ys }}">{{ $ys }}</option>

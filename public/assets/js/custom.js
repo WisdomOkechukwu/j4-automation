@@ -226,7 +226,7 @@
         var yearDropdownValue = $('#year_dropdown').val();
 
         if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
-            var redirect = `/admin/operator-overview/${monthDropdownValue}/${yearDropdownValue}`;
+            var redirect = `/admin/field-worker-overview/${monthDropdownValue}/${yearDropdownValue}`;
             window.location.href = redirect;
         }
     }
@@ -244,5 +244,15 @@
         $('#week-no-'+dropdownValue).removeClass('d-none').addClass('d-block');
 
     } 
+
+    function sortOperatorOverview(){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/admin/operator-overview/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
 
 

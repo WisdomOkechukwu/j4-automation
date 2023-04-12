@@ -8,7 +8,7 @@
                         <h5 class="card-title ">All Users</h5>
                     </div>
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-7">
                         </div>
 
                         <div class="col-md-3">
@@ -18,6 +18,13 @@
                                     <option value="bulk-message">Bulk Message</option>
                                 </select>
                             </fieldset>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                data-bs-target="#add-user">
+                                Add User
+                            </button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -91,7 +98,8 @@
                                                         <td>{{ $user->role->name }}</td>
                                                         <td class="text-bold-500">{{ $user->id_number }}</td>
                                                         <td>
-                                                            <a href="{{ route('admin.staff-profile',['user'=>$user]) }}" class="btn btn-primary">View</a>
+                                                            <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
+                                                                class="btn btn-primary">View</a>
                                                             <button type="button" class="btn btn-primary block"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#single-message-modal"
@@ -145,7 +153,8 @@
                                                             <td>{{ $admin->role->name }}</td>
                                                             <td class="text-bold-500">{{ $admin->id_number }}</td>
                                                             <td>
-                                                                <a href="{{ route('admin.staff-profile',['user'=>$admin]) }}" class="btn btn-primary">View</a>
+                                                                <a href="{{ route('admin.staff-profile', ['user' => $admin]) }}"
+                                                                    class="btn btn-primary">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -200,7 +209,8 @@
                                                             <td>{{ $operator->role->name }}</td>
                                                             <td class="text-bold-500">{{ $operator->id_number }}</td>
                                                             <td>
-                                                                <a href="{{ route('admin.staff-profile',['user'=>$operator]) }}" class="btn btn-primary">View</a>
+                                                                <a href="{{ route('admin.staff-profile', ['user' => $operator]) }}"
+                                                                    class="btn btn-primary">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -255,7 +265,8 @@
                                                             <td>{{ $user->role->name }}</td>
                                                             <td class="text-bold-500">{{ $user->id_number }}</td>
                                                             <td>
-                                                                <a href="{{ route('admin.staff-profile',['user'=>$user]) }}" class="btn btn-primary">View</a>
+                                                                <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
+                                                                    class="btn btn-primary">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -309,7 +320,8 @@
                                                             <td>{{ $user->role->name }}</td>
                                                             <td class="text-bold-500">{{ $user->id_number }}</td>
                                                             <td>
-                                                                <a href="{{ route('admin.staff-profile',['user'=>$user]) }}" class="btn btn-primary">View</a>
+                                                                <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
+                                                                    class="btn btn-primary">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -430,6 +442,93 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" id="single-header">
+                            Add New User
+                        </h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="card">
+                                <form action={{ route('admin.add.user') }} method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="firstName" class="form-label">First Name</label>
+                                            <input class="form-control" type="text" id="firstName" name="firstName"
+                                                autofocus required />
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input class="form-control" type="text" name="lastName" id="lastName" required/>
+                                        </div>
+                                        <div class="mb-3 col-md-12">
+                                            <label class="form-label" for="country">Job role</label>
+                                            <select class="select2 form-select" name="role" required>
+                                                <option value="">Select Job Role</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="country">Gender</label>
+                                            <select id="country" class="select2 form-select" name='gender' required>
+                                                <option value="">Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="country">Marital status</label>
+                                            <select class="select2 form-select" name="marital_status" required>
+                                                <option value="">Select Marital Status</option>
+                                                <option value="single">Single</option>
+                                                <option value="married">Married</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="country">ID Numer</label>
+                                            <input type="text" class="form-control" name="id_number"
+                                                placeholder="Enter ID Number" required/>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label for="address" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="address" value=""
+                                                name="address" placeholder="Enter Address" required/>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label for="address" class="form-label">Password</label>
+                                            <input type="password" id="password" class="form-control" name="password"
+                                                placeholder="Enter Password" autocomplete="off" required/>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {{-- <div class="modal-footer"> --}}
+                            {{-- <button type="submit" class="btn btn-primary ml-1">
+                                Add User
+                            </button> --}}
+                        {{-- </div> --}}
                 </div>
             </div>
         </div>
