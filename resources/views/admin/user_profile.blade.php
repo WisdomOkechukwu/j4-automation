@@ -171,11 +171,13 @@
                     <button type="submit" class="btn btn-primary mb-2">Save changes</button>
 
             </form>
+            @if(Auth::user()->id != $user->id)
             <form action={{ route('admin.staff-profile.delete') }} method="POST">
             @csrf
                 <input type="hidden" name='user' value="{{ $user->id }}">
                 <button type="submit" class="btn btn-outline-danger">Delete User</button>
             </form>
+            @endif
         </div>
     </div>
 
