@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Staff Strenght</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $staffStrength }}
                         </h2>
                     </div>
                 </div>
@@ -24,14 +24,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Issued Tickets</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $issuedTicketsNo }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -42,14 +42,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Total Ticket Cost</h4>
                         <h2 class="card-text">
-                            56
+                            ₦{{ $issuedTicketsCost }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -65,14 +65,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Days Shift</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $dayShift }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -83,14 +83,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Night Shift</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $nightShift }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -101,14 +101,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Off Shifts</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $offShift }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -124,14 +124,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Work Days</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $workDays }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>
@@ -142,14 +142,14 @@
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Staff Strenght</h4>
+                        <h4 class="card-title">Off Days</h4>
                         <h2 class="card-text">
-                            56
+                            {{ $offDays }}
                         </h2>
                     </div>
                 </div>
                 <div>
-                    <h6>All Staff</h6>
+                    <h6>This Month</h6>
                 </div>
                 {{-- <div class="card-footer">
                     <h6>All Staff</h6>

@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/simple-datatables/style.css') }}">
 
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -92,14 +93,23 @@
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            <h6 class="mb-0 text-gray-600">{{ Auth::user()->full_name }}</h6>
+                                            <p class="mb-0 text-sm text-gray-600">{{ Auth::user()->role->name }}</p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="{{ asset('assets/images/faces/1.jpg') }}">
+                                                @if (Auth::user()->dp)
+                                                    <img src="{{ asset('storage/upload/' . Auth::user()->dp) }}"
+                                                        id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                        height="100" width="100" id="uploadedAvatar" />
+                                                @else
+                                                    <img src="https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}"
+                                                        id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                        height="100" width="100" id="uploadedAvatar" />
+                                                @endif
+                                                {{-- <img src="{{ asset('assets/images/faces/1.jpg') }}"> --}}
                                             </div>
-                                        </div>˜
+                                        </div>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">

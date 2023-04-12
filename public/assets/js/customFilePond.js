@@ -46,6 +46,7 @@ FilePond.setOptions({
                     if(this.status == 200) {
                         let response = JSON.parse(this.responseText);
                         $('#user-avatar').attr("src",response.dp);
+                        $('#user-avatar-profile').attr("src",response.dp);
                     } else {
                         // console.log("Error", this.statusText);
                     }

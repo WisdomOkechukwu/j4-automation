@@ -168,7 +168,6 @@
 
     function loadSingleAssignModal(user){
         $('#single-user-id').val(JSON.stringify(user));
-        // $('#single-user-id').val(user);
         $('#user-modal-title').html(`${user.first_name} ${user.last_name} Meal Ticket Information`)
     }
 
@@ -195,7 +194,6 @@
     }
 
     function bulkMessageSendForm(){
-        // console.log($('#bulk-subject-header').val(),  $('#bulk-body').val());
         $('#bulk-subject').val($('#bulk-subject-header').val());
         $('#bulk-message').val($('#bulk-body').val());
 
@@ -204,7 +202,6 @@
 
     function sendSingleMessage(user){
         $('#single-user-id').val(JSON.stringify(user));
-        // $('#single-user-id').val(user);
         $('#single-header').html(`send message to${user.first_name} ${user.last_name}`);
     }
 
@@ -223,18 +220,29 @@
             }
           });
     }
-    // $(selector).submit(function)  
 
-    // document.getElementById("myForm").submit();
+    function sortFieldWorkerOverview(){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
 
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/admin/operator-overview/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
 
-    // $( "form" ).submit(function( event ) {  
-    //     if ( $( "input:first" ).val() === "javatpoint" ) {  
-    //       $( "span" ).text( "Submitted Successfully." ).show();  
-    //       return;  
-    //     }  
-    //     $( "span" ).text( "Not valid!" ).show().fadeOut( 2000 );  
-    //     event.preventDefault();  
-    //   });  
+    function fieldWorkerOverviewWeeks(){
+        var  weekArray = [1,2,3,4,5];
+        var dropdownValue = $('#weekDropDown').val();
+
+        weekArray.map( arrayData => {
+            if(dropdownValue != arrayData){
+                $('#week-no-'+arrayData).removeClass('d-block').addClass('d-none');
+            }
+        })
+
+        $('#week-no-'+dropdownValue).removeClass('d-none').addClass('d-block');
+
+    } 
 
 

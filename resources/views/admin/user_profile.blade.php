@@ -6,10 +6,10 @@
         <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
                 @if ($user->dp)
-                    <img src="{{ asset('storage/upload/' . $user->dp) }}" id="user-avatar" alt="user-avatar"
+                    <img src="{{ asset('storage/upload/' . $user->dp) }}" id="user-avatar-profile" alt="user-avatar"
                         class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 @else
-                    <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}" id="user-avatar" alt="user-avatar"
+                    <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}" id="user-avatar-profile" alt="user-avatar"
                         class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 @endif
 

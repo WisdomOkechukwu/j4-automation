@@ -25,7 +25,7 @@ Route::GET('/field-worker-schedules/{user}/{month?}/{year?}', [ScheduleFieldCont
 
 Route::POST('/field-worker-schedules-action', [ScheduleFieldController::class,'scheduleFieldWorkerAction'])->name('admin.user.schedule.field.worker.action');
 
-Route::GET('/operator-overview', [OperatorsScheduleOverviewController::class,'operatorOverview'])->name('admin.user.operator.overview');
+Route::GET('/operator-overview/{month?}/{year?}', [OperatorsScheduleOverviewController::class,'operatorOverview'])->name('admin.user.operator.overview');
 
 Route::GET('/field-worker-overview', [FieldWorkersTrackingsOverviewController::class,'fieldWorkerOverview'])->name('admin.user.field.worker.overview');
 
