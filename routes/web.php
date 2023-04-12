@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\FieldAdminController;
-use App\Http\Controllers\FieldWorkerController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +23,9 @@ Route::get('/', function () {
 Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name('login');
 
 Route::GET('/home', [HomeController::class,'redirectPersonnel'])->name('home');
+
+// don't use unless you want to rest storage
+Route::group(['middleware' => ['auth','admin']], function () {
+    Route::GET('/reset-file-system', [Controller::class,'deleteFilSystems']);
+});
 
