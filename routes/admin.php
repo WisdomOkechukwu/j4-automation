@@ -43,6 +43,8 @@ Route::GET('/staff-profile/{user}', [UserProfileController::class,'staffProfile'
 
 Route::POST('/staff-profile-update', [UserProfileController::class,'updateStaffProfile'])->name('admin.staff-profile.update');
 
+Route::POST('/staff-profile-delete', [UserProfileController::class,'deleteStaffProfile'])->name('admin.staff-profile.delete');
+
 Route::POST('/upload-dp', [UserProfileController::class,'uploadDp'])->name('admin.upload-dp');
 
 Route::POST('/user-message', [MessageController::class,'handleSingleMessage'])->name('admin.user-message');

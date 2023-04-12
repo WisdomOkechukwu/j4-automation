@@ -83,4 +83,9 @@ class UserProfileController extends Controller
         $user->save();
         return back()->with('success', 'User Information Updated');
     }
+
+    public function deleteStaffProfile(Request $request){
+        User::find($request->user)->delete();
+        return redirect()->route('admin.users')->with('success', 'User Deleted Successfully');
+    }
 }

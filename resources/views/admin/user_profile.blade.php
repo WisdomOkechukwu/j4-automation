@@ -9,8 +9,8 @@
                     <img src="{{ asset('storage/upload/' . $user->dp) }}" id="user-avatar-profile" alt="user-avatar"
                         class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 @else
-                    <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}" id="user-avatar-profile" alt="user-avatar"
-                        class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                    <img src="https://ui-avatars.com/api/?name={{ $user->full_name }}" id="user-avatar-profile"
+                        alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 @endif
 
                 <div class="button-wrapper">
@@ -168,67 +168,71 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                </div>
+                    <button type="submit" class="btn btn-primary mb-2">Save changes</button>
+
+            </form>
+            <form action={{ route('admin.staff-profile.delete') }} method="POST">
+            @csrf
+                <input type="hidden" name='user' value="{{ $user->id }}">
+                <button type="submit" class="btn btn-outline-danger">Delete User</button>
             </form>
         </div>
+    </div>
 
 
 
-        <div class="modal fade" id="upload-image" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title" id="single-header">
-                            upload {{ $user->full_name }} profile picture
-                        </h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id='user-token' name='_token' value="{{ csrf_token() }}">
-                        <input type="hidden" id='user-id' name='user' value="{{ $user->id }}">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group row align-items-center">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title">Upload Image Here</h5>
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <input type="file" name="dp_image"
-                                                    class="filepond-profile-image-upload" required
-                                                    data-max-file-size="2MB">
-                                            </div>
+    <div class="modal fade" id="upload-image" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title" id="single-header">
+                        upload {{ $user->full_name }} profile picture
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id='user-token' name='_token' value="{{ csrf_token() }}">
+                    <input type="hidden" id='user-id' name='user' value="{{ $user->id }}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row align-items-center">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Upload Image Here</h5>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <input type="file" name="dp_image" class="filepond-profile-image-upload"
+                                                required data-max-file-size="2MB">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- filepond validation -->
-        <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-        <!-- image editor -->
-        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
-        </script>
-        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    </div>
+    <!-- filepond validation -->
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <!-- image editor -->
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+    </script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 
-        <!-- filepond -->
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-        <script src="{{ asset('assets/js/customFilePond.js') }}"></script>
+    <!-- filepond -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="{{ asset('assets/js/customFilePond.js') }}"></script>
     </div>
 @endsection
