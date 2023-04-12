@@ -20,15 +20,15 @@ class HomeController extends Controller
                 break;
 
             case 889:
-                dd('Operator');
+                return redirect()->route('operator.index');
                 break;
             
             case 779:
-                dd('Field Admin');
+                return redirect()->route('field.admin.index');
                 break;
 
             case 777:
-                dd('Field Worker');
+                return redirect()->route('field.worker.index');
                 break;
                 
             default:

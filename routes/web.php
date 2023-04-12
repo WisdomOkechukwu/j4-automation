@@ -26,17 +26,3 @@ Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name
 
 Route::GET('/home', [HomeController::class,'redirectPersonnel'])->name('home');
 
-Route::group(['prefix' => 'field'], function () {
-
-    Route::group(['prefix' => 'worker'], function () {
-        Route::GET('/', [FieldWorkerController::class,'index'])->name('field.workers.index');
-        Route::GET('/schedule', [FieldWorkerController::class,'schedule'])->name('field.workers.schedule');
-        Route::GET('/messages', [FieldWorkerController::class,'messages'])->name('field.workers.messages');
-        Route::GET('/profile', [FieldWorkerController::class,'profile'])->name('field.workers.profile');
-    });
-
-    Route::group(['prefix' => 'admin'], function () {
-        Route::GET('/', [FieldAdminController::class,'index'])->name('field.admin.index');
-    });
-});
-

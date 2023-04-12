@@ -21,10 +21,12 @@
                         </div>
 
                         <div class="col-md-2">
+                            @if(Auth::user()->role_id == 999)
                             <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
                                 data-bs-target="#add-user">
                                 Add User
                             </button>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
