@@ -24,8 +24,7 @@
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade mt-4" id="sent" role="tabpanel"
-                            aria-labelledby="home-tab">
+                        <div class="tab-pane fade mt-4" id="sent" role="tabpanel" aria-labelledby="home-tab">
                             @foreach ($sentMessages as $message)
                                 <div class="accordion" id="accordionExample">
                                     <div class="accordion-item">
@@ -35,8 +34,15 @@
                                                 aria-expanded="true" aria-controls="collapseOne">
                                                 <div class="pr-50 m-4 mt-0 mb-0 ml-0">
                                                     <div class="avatar">
-                                                        <img src="{{ asset('assets/images/faces/1.jpg') }}"
-                                                            alt="avatar avatar-xl me-3">
+                                                        @if ($message->receiver->dp)
+                                                            <img src="{{ asset('storage/upload/' . $message->receiver->dp) }}"
+                                                                id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                                height="100" width="100" id="uploadedAvatar" />
+                                                        @else
+                                                            <img src="https://ui-avatars.com/api/?name={{ $message->receiver->full_name }}"
+                                                                id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                                height="100" width="100" id="uploadedAvatar" />
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
@@ -71,7 +77,8 @@
                             @endforeach
                         </div>
 
-                        <div class="tab-pane fade show active mt-4" id="inbox" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active mt-4" id="inbox" role="tabpanel"
+                            aria-labelledby="home-tab">
                             @foreach ($receivedMessages as $message)
                                 <div class="accordion" id="accordionExample">
                                     <div class="accordion-item">
@@ -82,8 +89,15 @@
                                                 @if ($message->is_read == 0) onclick = "setReadMessageData({{ $message->id }})" @endif>
                                                 <div class="pr-50 m-4 mt-0 mb-0 ml-0">
                                                     <div class="avatar">
-                                                        <img src="{{ asset('assets/images/faces/1.jpg') }}"
-                                                            alt="avatar avatar-xl me-3">
+                                                        @if ($message->sender->dp)
+                                                            <img src="{{ asset('storage/upload/' . $message->sender->dp) }}"
+                                                                id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                                height="100" width="100" id="uploadedAvatar" />
+                                                        @else
+                                                            <img src="https://ui-avatars.com/api/?name={{ $message->sender->full_name }}"
+                                                                id="user-avatar" alt="user-avatar" class="d-block rounded"
+                                                                height="100" width="100" id="uploadedAvatar" />
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
