@@ -36,7 +36,7 @@ class HomePageController extends Controller
         //Leave Tracker 
         //still pending
 
-        // return 
+        //rework on this view
 
     }
 }

@@ -35,8 +35,6 @@ Route::POST('/add-user', [UsersController::class,'addUser'])->name('admin.add.us
 
 Route::GET('/messages', [MessageController::class,'userMessage'])->name('admin.messages');
 
-Route::GET('/read-message/{id}', [MessageController::class,'readMessage']);
-
 Route::GET('/user-profile', [UserProfileController::class,'userProfile'])->name('admin.user-profile');
 
 Route::GET('/staff-profile/{user}', [UserProfileController::class,'staffProfile'])->name('admin.staff-profile');
@@ -44,8 +42,6 @@ Route::GET('/staff-profile/{user}', [UserProfileController::class,'staffProfile'
 Route::POST('/staff-profile-update', [UserProfileController::class,'updateStaffProfile'])->name('admin.staff-profile.update');
 
 Route::POST('/staff-profile-delete', [UserProfileController::class,'deleteStaffProfile'])->name('admin.staff-profile.delete');
-
-Route::POST('/upload-dp', [UserProfileController::class,'uploadDp'])->name('admin.upload-dp');
 
 Route::POST('/user-message', [MessageController::class,'handleSingleMessage'])->name('admin.user-message');
 
