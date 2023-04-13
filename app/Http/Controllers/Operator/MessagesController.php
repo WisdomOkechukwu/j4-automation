@@ -17,7 +17,7 @@ class MessagesController extends Controller
             ->get();
 
         //rework on this view
-        return view('admin.user_message', compact(['messages']));
+        return view('messages', compact(['messages']));
     }
 
 }

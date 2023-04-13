@@ -31,12 +31,13 @@ class HomePageController extends Controller
         ->where('date', '<=', $endOfMonth)
         ->first();
         
-        dd($mealTicket);
+        // dd($mealTicket);
 
         //Leave Tracker 
         //still pending
 
         //rework on this view
+        return view('operator.index',compact(['operatorSchedule','mealTicket']));
 
     }
 }

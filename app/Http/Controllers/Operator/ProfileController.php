@@ -17,7 +17,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $role = Role::whereNot('id', $user->role_id)->get();
         //rework on this view
-        return view('admin.user_profile', compact(['user', 'role']));
+        return view('user', compact(['user', 'role']));
     }
 
     public function update(Request $request)
@@ -40,15 +40,9 @@ class ProfileController extends Controller
         $user = User::find($request->user_id);
         $user->first_name = $request->firstName;
         $user->last_name = $request->lastName;
-        $user->role_id = $request->role;
         $user->gender = $request->gender;
         $user->address = $request->address; 
         $user->marital_status = $request->marital_status;
-        $user->id_number = $request->id_number;
-        $user->leave_status = $request->leave_status;
-        $user->hmo = $request->hmo;
-        $user->loan_eligibility = $request->loan_eligibility;
-
         if($request->password === NULL){
             $user->password = Hash::make($request->password);
         }

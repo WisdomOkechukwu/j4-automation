@@ -33,6 +33,6 @@ class ScheduleController extends Controller
         $mealTicket = $schedule['mealTickets'];
 
         //rework on this view
-        return view('admin.schedule_operator', compact(['days', 'mealTicket', 'months', 'years', 'segment', 'month', 'year', 'user']));
+        return view('operator.schedule', compact(['days', 'mealTicket', 'months', 'years', 'segment', 'month', 'year', 'user']));
     }
 }
