@@ -43,8 +43,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ number_format($mealTicket->number) }}</td>
-                                        <td style="text-align: right; flex: 1;">{{ number_format($mealTicket->amount) }}</td>
+                                        <td>{{ ($mealTicket) ? number_format($mealTicket->number) : 0 }}</td>
+                                        <td style="text-align: right; flex: 1;">{{ ($mealTicket) ? number_format($mealTicket->amount) : 0 }}</td>
                                     </tr>
                                 </tbody>
                             </table>

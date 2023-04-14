@@ -36,9 +36,9 @@
 
             <div class="col-md-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class='btn btn-success pl-4 pr-4'>Day</button>
-                <button type="buttton" class='btn btn-secondary pl-4 pr-4 ml-2'>Night</button>
-                <button type="buttton" class='btn btn-danger pl-4 pr-4 ml-2'>Off</button>
+                <button type="button" class='btn btn-success pl-4 pr-4' onclick='popDate("day")'>Day</button>
+                <button type="buttton" class='btn btn-secondary pl-4 pr-4 ml-2' onclick='popDate("night")'>Night</button>
+                <button type="buttton" class='btn btn-danger pl-4 pr-4 ml-2' onclick='popDate("off")'>Off</button>
             </div>
                 
 
@@ -69,22 +69,22 @@
                                                 class='btn
                                               @switch($d['schedule'])
                                                     @case('day')
-                                                        btn btn-outline-success
+                                                        btn btn-custom-outline-success
                                                         @break
                                                     @case('night')
-                                                        btn btn-outline-secondary
+                                                        btn btn-custom-outline-secondary
                                                         @break
                                                     @case('off')
-                                                       btn btn-outline-danger
+                                                       btn btn-custom-outline-danger
                                                         @break
                                                     @case(null)
-                                                        btn btn-outline-danger
+                                                        btn btn-custom-outline-danger
                                                         @break
                                                 
                                                     @default
                                                         btn btn-outline-warning
                                                 @endswitch  
-                                             p-4 rounded'><b>{{ $d['day'] }}</b></button>
+                                             p-4'><b>{{ $d['day'] }}</b></button>
                                             {{-- <div style="text-align: center;
                                                         padding: 40px;
                                                         display:flex;

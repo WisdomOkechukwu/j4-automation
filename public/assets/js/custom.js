@@ -256,5 +256,23 @@
         }
     }
 
+    function popDate(section)
+    {
+        if(section === 'day'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-success').addClass('btn-custom-outline-success-pop');
+        }
+
+        if(section === 'night'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-secondary').addClass('btn-custom-outline-secondary-pop');
+        }
+
+        if(section === 'off'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-danger').addClass('btn-custom-outline-danger-pop');
+        }
+    }
+
 
 
