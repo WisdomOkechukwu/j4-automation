@@ -1,4 +1,19 @@
-    function generateTable(value){
+$(document).ready(function() {
+    
+    $('.all-users-table').DataTable({
+        lengthMenu: [
+            [10, 100, 1000, -1],
+            [10, 100, 1000, 'All'],
+        ],
+        paging: false,
+        ordering:false,
+        order: [
+            [0, 'desc']
+        ],
+    });
+});
+
+   function generateTable(value){
         var table = document.querySelector('.users-table-'+value);
         let dataTable = new simpleDatatables.DataTable(table);
     } 

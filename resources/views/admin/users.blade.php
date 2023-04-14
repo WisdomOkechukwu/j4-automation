@@ -71,7 +71,7 @@
                                     </div>
 
                                     <div class="table-responsive text-center">
-                                        <table class="table table-lg users-table">
+                                        <table class="table table-lg all-users-table">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">
@@ -101,7 +101,7 @@
                                                         <td class="text-bold-500">{{ $user->id_number }}</td>
                                                         <td>
                                                             <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
-                                                                class="btn btn-primary">View</a>
+                                                                class="btn btn-primary mb-1">View</a>
                                                             <button type="button" class="btn btn-primary block"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#single-message-modal"
@@ -126,7 +126,7 @@
                                         </div> --}}
                                         </div>
                                         <div class="table-responsive text-center">
-                                            <table class="table table-lg users-table-admin">
+                                            <table class="table table-lg all-users-table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">
@@ -156,7 +156,7 @@
                                                             <td class="text-bold-500">{{ $admin->id_number }}</td>
                                                             <td>
                                                                 <a href="{{ route('admin.staff-profile', ['user' => $admin]) }}"
-                                                                    class="btn btn-primary">View</a>
+                                                                    class="btn btn-primary mb-1">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -182,7 +182,7 @@
                                         </div> --}}
                                         </div>
                                         <div class="table-responsive text-center">
-                                            <table class="table table-lg users-table-operator">
+                                            <table class="table table-lg all-users-table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">
@@ -212,7 +212,7 @@
                                                             <td class="text-bold-500">{{ $operator->id_number }}</td>
                                                             <td>
                                                                 <a href="{{ route('admin.staff-profile', ['user' => $operator]) }}"
-                                                                    class="btn btn-primary">View</a>
+                                                                    class="btn btn-primary mb-1">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -238,7 +238,7 @@
                                         </div> --}}
                                         </div>
                                         <div class="table-responsive text-center">
-                                            <table class="table table-lg users-table-field-admin">
+                                            <table class="table table-lg all-users-table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">
@@ -268,7 +268,7 @@
                                                             <td class="text-bold-500">{{ $user->id_number }}</td>
                                                             <td>
                                                                 <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
-                                                                    class="btn btn-primary">View</a>
+                                                                    class="btn btn-primary mb-1">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
@@ -293,7 +293,7 @@
                                         </div> --}}
                                         </div>
                                         <div class="table-responsive text-center">
-                                            <table class="table table-lg users-table-field">
+                                            <table class="table table-lg all-users-table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">
@@ -323,7 +323,7 @@
                                                             <td class="text-bold-500">{{ $user->id_number }}</td>
                                                             <td>
                                                                 <a href="{{ route('admin.staff-profile', ['user' => $user]) }}"
-                                                                    class="btn btn-primary">View</a>
+                                                                    class="btn btn-primary mb-1">View</a>
                                                                 <button type="button" class="btn btn-primary block"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#single-message-modal"
