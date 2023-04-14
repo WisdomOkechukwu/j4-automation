@@ -23,18 +23,18 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        @if ($operatorSchedule->count() > 1)
-                                            @foreach ($operatorSchedule as $schedule)
-                                                <td class="text-center">{{ ucwords($schedule->shift) }}</td>
+                                        @if ($fieldWorkerSchedule->count() > 1)
+                                            @foreach ($fieldWorkerSchedule as $schedule)
+                                                <td class="text-center">{{ strtoupper($schedule->shift) }}</td>
                                             @endforeach
                                         @else
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
-                                            <td class="text-center">Off</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
+                                            <td class="text-center">OD</td>
                                         @endif
                                     </tr>
                                 </tbody>
@@ -43,19 +43,34 @@
 
 
                         <h4 class="card-title mt-3">Meal Ticket Information</h4>
-                        <div class="table-responsive">
+                        <div class="table-responsive text-center">
                             <table class="table table-lg">
                                 <thead>
                                     <tr>
-                                        <th>No. Of Tickets</th>
-                                        <th style="text-align: right; flex: 1;">Amount</th>
+                                        <th class="text-center">Mon</th>
+                                        <th class="text-center">Tue</th>
+                                        <th class="text-center">Wed</th>
+                                        <th class="text-center">Thu</th>
+                                        <th class="text-center">Fri</th>
+                                        <th class="text-center">Sat</th>
+                                        <th class="text-center">Sun</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ $mealTicket ? number_format($mealTicket->number) : 0 }}</td>
-                                        <td style="text-align: right; flex: 1;">
-                                            {{ $mealTicket ? number_format($mealTicket->amount) : 0 }}</td>
+                                        @if ($EngineeringSchedule->count() > 1)
+                                            @foreach ($EngineeringSchedule as $schedule)
+                                                <td class="text-center">{{ ucwords($schedule->shift) }}</td>
+                                            @endforeach
+                                        @else
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                            <td class="text-center">OFF</td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>

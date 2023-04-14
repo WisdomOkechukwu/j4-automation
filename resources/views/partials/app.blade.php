@@ -59,7 +59,7 @@
                     @break
 
                     @case(779)
-                        {{-- @include('partials.sidebar.field-admin') --}}
+                        @include('partials.sidebar.field-admin')
                     @break
 
                     @case(777)

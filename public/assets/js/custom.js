@@ -64,7 +64,7 @@
             nightButton.classList.add("btn-outline-secondary");
             nightButton.classList.remove("btn-secondary");
             
-            status.value = 'night';
+            status.value = 'off';
         }
     }
 
@@ -258,7 +258,7 @@
 
     function popDate(section)
     {
-        if(section === 'day'){
+        if(section === 'day' || section === 'wd'){
             $('#popDateData').val('day');
             $('.btn-custom-outline-success').addClass('btn-custom-outline-success-pop');
         }
@@ -268,9 +268,29 @@
             $('.btn-custom-outline-secondary').addClass('btn-custom-outline-secondary-pop');
         }
 
-        if(section === 'off'){
+        if(section === 'off' || section === 'od'){
             $('#popDateData').val('day');
             $('.btn-custom-outline-danger').addClass('btn-custom-outline-danger-pop');
+        }
+    }
+
+    function fieldWorkerSchedule(link){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/${link}/schedule/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
+
+    function fieldWorkerScheduleForAdmin(user){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/field-admin/field-worker-schedules/${user}/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
         }
     }
 

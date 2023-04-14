@@ -27,5 +27,7 @@ class HomePageController extends Controller
             ->get();
         
         //leave tracker
+
+        return view('field.index',compact(['fieldWorkerSchedule','EngineeringSchedule']));
     }
 }

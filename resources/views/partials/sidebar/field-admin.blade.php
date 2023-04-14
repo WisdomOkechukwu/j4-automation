@@ -2,22 +2,29 @@
     <ul class="menu">
         <li class="sidebar-title">Menu</li>
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'field.worker.index' ? 'active' : '' }} ">
-            <a href="{{ route('field.worker.index') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'field.admin.index' ? 'active' : '' }} ">
+            <a href="{{ route('field.admin.index') }}" class='sidebar-link'>
                 <i class="bi bi-house-fill"></i>
                 <span>Dashboard</span>
             </a>
         </li>
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'field.worker.schedule' ? 'active' : '' }}  ">
-            <a href="{{ route('field.worker.schedule') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'field.admin.schedule' ? 'active' : '' }}  ">
+            <a href="{{ route('field.admin.schedule') }}" class='sidebar-link'>
                 <i class="bi bi-calendar-date-fill"></i>
-                <span>Schedule</span>
+                <span>My Schedule</span>
             </a>
         </li>
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'field.worker.messages' ? 'active' : '' }}  ">
-            <a href="{{ route('field.worker.messages') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'field.admin.field-workers' ? 'active' : '' }}  ">
+            <a href="{{ route('field.admin.field-workers') }}" class='sidebar-link'>
+                <i class="bi bi-calendar-date-fill"></i>
+                <span>All Schedule</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item {{ Route::currentRouteName() == 'field.admin.messages' ? 'active' : '' }}  ">
+            <a href="{{ route('field.admin.messages') }}" class='sidebar-link'>
                 <i class="bi bi-chat-left-text-fill"></i>
                 <span>Messages </span> 
                 @if(Auth::user()->messages->where('is_read', 0)->count() != 0)
@@ -26,8 +33,8 @@
             </a>
         </li>
 
-        <li class="sidebar-item {{ Route::currentRouteName() == 'field.worker.profile' ? 'active' : '' }}  ">
-            <a href="{{ route('field.worker.profile') }}" class='sidebar-link'>
+        <li class="sidebar-item {{ Route::currentRouteName() == 'field.admin.profile' ? 'active' : '' }}  ">
+            <a href="{{ route('field.admin.profile') }}" class='sidebar-link'>
                 <i class="bi bi-person-circle"></i>
                 <span>My Profile</span> 
             </a>

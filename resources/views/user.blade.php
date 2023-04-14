@@ -30,7 +30,7 @@
             @elseif ($user->role_id == 779)
             <form action={{ route('operator.profile.update') }} method="POST">
             @elseif ($user->role_id == 777)
-            <form action={{ route('operator.profile.update') }} method="POST">
+            <form action={{ route('field.worker.profile.update') }} method="POST">
             @endif
                 @csrf
                 <div class="row">

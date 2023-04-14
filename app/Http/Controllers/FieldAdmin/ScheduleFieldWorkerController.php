@@ -17,7 +17,7 @@ class ScheduleFieldWorkerController extends Controller
             ->where('role_id', 777)
             ->get();
 
-        return view('admin.all_schedules', compact(['users']));
+        return view('field.field-workers', compact(['users']));
     }
 
     public function scheduleFieldWorker(User $user, $month = null, $year = null)
@@ -40,7 +40,7 @@ class ScheduleFieldWorkerController extends Controller
         $years = $calendar[0];
 
         $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
-        return view('admin.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+        return view('field.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
     }
 
     public function scheduleFieldWorkerAction(Request $request)

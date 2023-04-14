@@ -37,5 +37,17 @@
             </a>
         </li>
 
+        <li class="sidebar-item {{ Route::currentRouteName() == 'logout' ? 'active' : '' }}  ">
+            <a href="#" class="sidebar-link"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+
     </ul>
 </div>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>

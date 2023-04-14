@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\FieldWorker;
 
-use App\Http\Controllers\Admin\ScheduleOperatorController;
+use App\Http\Controllers\Admin\ScheduleFieldController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\CalendarHelperController;
 use Carbon\Carbon;
@@ -24,13 +24,13 @@ class ScheduleController extends Controller
         $daysInAMonth = $startOfMonth->copy()->daysInMonth;
         $segment = $startOfMonth->format('F Y');
 
-        $days = (new ScheduleOperatorController())->generateFieldWorkerCalendar($month, $year, $user);
+        $days = (new ScheduleFieldController())->generateFieldWorkerCalendar($month, $year, $user);
 
         $calendar = CalendarHelperController::calendarGenerator();
         $months = $calendar[1];
         $years = $calendar[0];
 
-        $noOfWeeks = (new ScheduleOperatorController())->noOfWeeks($days);
-        return view('admin.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+        $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
+        return view('field.schedule', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
     }
 }

@@ -35,12 +35,13 @@
             </div>
 
             <div class="col-md-2">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class='btn btn-success pl-4 pr-4' onclick='popDate("day")'>Day</button>
-                <button type="buttton" class='btn btn-secondary pl-4 pr-4 ml-2' onclick='popDate("night")'>Night</button>
-                <button type="buttton" class='btn btn-danger pl-4 pr-4 ml-2' onclick='popDate("off")'>Off</button>
-            </div>
-                
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class='btn btn-success pl-4 pr-4' onclick='popDate("day")'>Day</button>
+                    <button type="buttton" class='btn btn-secondary pl-4 pr-4 ml-2'
+                        onclick='popDate("night")'>Night</button>
+                    <button type="buttton" class='btn btn-danger pl-4 pr-4 ml-2' onclick='popDate("off")'>Off</button>
+                </div>
+
 
             </div>
         </div>
@@ -67,47 +68,25 @@
                                         @if ($d != null)
                                             <button
                                                 class='btn
-                                              @switch($d['schedule'])
-                                                    @case('day')
-                                                        btn btn-custom-outline-success
-                                                        @break
-                                                    @case('night')
-                                                        btn btn-custom-outline-secondary
-                                                        @break
-                                                    @case('off')
-                                                       btn btn-custom-outline-danger
-                                                        @break
-                                                    @case(null)
-                                                        btn btn-custom-outline-danger
-                                                        @break
-                                                
-                                                    @default
-                                                        btn btn-outline-warning
-                                                @endswitch  
-                                             p-4'><b>{{ $d['day'] }}</b></button>
-                                            {{-- <div style="text-align: center;
-                                                        padding: 40px;
-                                                        display:flex;
-                                                        width:70%;
-                                                        border-radius: 10px;
                                                 @switch($d['schedule'])
-                                                    @case('day')
-                                                        border: 3px solid greenyellow;
-                                                        @break
-                                                    @case('night')
-                                                        border: 3px solid gray;
-                                                        @break
-                                                    @case('off')
-                                                        border: 3px solid red;
-                                                        @break
-                                                    @case(null)
-                                                        border: 3px solid red;
-                                                        @break
-                                                
-                                                    @default
-                                                        border: 1px solid greenyellow;
-                                                @endswitch ">
-                                                <h5>{{ $d['day'] }}</h5></div> --}}
+                                                        @case('day')
+                                                            btn btn-custom-outline-success
+                                                            @break
+                                                        @case('night')
+                                                            btn btn-custom-outline-secondary
+                                                            @break
+                                                        @case('off')
+                                                        btn btn-custom-outline-danger
+                                                            @break
+                                                        @case(null)
+                                                            btn btn-custom-outline-danger
+                                                            @break
+                                                    
+                                                        @default
+                                                            btn btn-outline-warning
+                                                    @endswitch  
+                                                p-4'><b>{{ $d['day'] }}</b>
+                                            </button>
                                         @endif
                                     </td>
                                 @endforeach
@@ -133,12 +112,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @if($mealTicket)
-                                    <td style="text-align: left; flex: 1;">{{ number_format($mealTicket->number) }}</td>
-                                    <td style="text-align: right; flex: 1;">₦{{ number_format($mealTicket->amount) }}</td>
+                                    @if ($mealTicket)
+                                        <td style="text-align: left; flex: 1;">{{ number_format($mealTicket->number) }}</td>
+                                        <td style="text-align: right; flex: 1;">₦{{ number_format($mealTicket->amount) }}
+                                        </td>
                                     @else
-                                    <td style="text-align: left; flex: 1;">0</td>
-                                    <td style="text-align: right; flex: 1;">₦0</td>
+                                        <td style="text-align: left; flex: 1;">0</td>
+                                        <td style="text-align: right; flex: 1;">₦0</td>
                                     @endif
                                 </tr>
                             </tbody>

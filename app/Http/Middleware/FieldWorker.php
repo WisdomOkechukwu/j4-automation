@@ -17,7 +17,7 @@ class FieldWorker
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-
+        
         if($user->role_id == 777 ){
             return $next($request);
         }else{
