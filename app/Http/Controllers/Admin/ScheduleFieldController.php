@@ -62,7 +62,7 @@ class ScheduleFieldController extends Controller
                 ]);
             } else {
                 $engineeringSchedule = new EngineeringSchedule();
-                $engineeringSchedule->is_meal = $engineering_status;
+                $engineeringSchedule->is_meal = ($engineering_status != NULL) ? $engineering_status : 'off';
                 $engineeringSchedule->meal_name = $meal_data;
                 $engineeringSchedule->date = $scheduleDate;
                 $engineeringSchedule->user_id = $request->user;
@@ -85,7 +85,7 @@ class ScheduleFieldController extends Controller
                 ]);
             } else {
                 $fieldWorkerSchedule = new FieldWorkerSchedule();
-                $fieldWorkerSchedule->shift = $value;
+                $fieldWorkerSchedule->shift = ($value != NULL) ? $value : 'od';
                 $fieldWorkerSchedule->date = $scheduleDate;
                 $fieldWorkerSchedule->user_id = $request->user;
                 $fieldWorkerSchedule->save();

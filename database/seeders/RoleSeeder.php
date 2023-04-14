@@ -25,12 +25,12 @@ class RoleSeeder extends Seeder
 
         $fieldWorker = [
             'id' => 779,
-            'name' => 'Field Worker',
+            'name' => 'Field Admin',
         ];
 
         $fieldAdmin = [
             'id' => 777,
-            'name' => 'Field Admin',
+            'name' => 'Field Worker',
         ];
         \App\Models\Role::create($admin);
         \App\Models\Role::create($operator);

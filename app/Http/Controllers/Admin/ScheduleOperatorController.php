@@ -84,7 +84,7 @@ class ScheduleOperatorController extends Controller
                 ]);
             } else {
                 $operatorSchedule = new OperatorSchedule();
-                $operatorSchedule->shift = $sd;
+                $operatorSchedule->shift = ($sd != NULL) ? $sd : 'off';
                 $operatorSchedule->date = $scheduleDate;
                 $operatorSchedule->user_id = $request->user;
                 $operatorSchedule->save();

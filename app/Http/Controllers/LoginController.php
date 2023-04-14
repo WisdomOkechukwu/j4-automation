@@ -32,6 +32,6 @@ class LoginController extends Controller
         }
 
         return redirect()->intended();
-        // return redirect()->route('home'); //take note of the invoke function
+        // return redirect()->route('home');
     }
 }

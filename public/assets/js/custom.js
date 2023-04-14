@@ -1,4 +1,19 @@
-    function generateTable(value){
+$(document).ready(function() {
+    
+    $('.all-users-table').DataTable({
+        lengthMenu: [
+            [10, 100, 1000, -1],
+            [10, 100, 1000, 'All'],
+        ],
+        paging: false,
+        ordering:false,
+        order: [
+            [0, 'desc']
+        ],
+    });
+});
+
+   function generateTable(value){
         var table = document.querySelector('.users-table-'+value);
         let dataTable = new simpleDatatables.DataTable(table);
     } 
@@ -13,17 +28,29 @@
         var nightID = 'night-' + day;
         var statusID = 'status-' + day;
 
-        var dayButton = document.getElementById(dayID);
-        dayButton.classList.remove("btn-outline-success");
-        dayButton.classList.add("btn-success");
-
-        var nightButton = document.getElementById(nightID);
-        nightButton.classList.remove("btn-secondary");
-        nightButton.classList.add("btn-outline-secondary");
-
-
         var status = document.getElementById(statusID);
-        status.value = 'day';
+        if(status.value != 'day'){
+
+            var dayButton = document.getElementById(dayID);
+            dayButton.classList.remove("btn-outline-success");
+            dayButton.classList.add("btn-success");
+
+            var nightButton = document.getElementById(nightID);
+            nightButton.classList.remove("btn-secondary");
+            nightButton.classList.add("btn-outline-secondary");
+
+            status.value = 'day';
+        } else {
+            var dayButton = document.getElementById(dayID);
+            dayButton.classList.add("btn-outline-success");
+            dayButton.classList.remove("btn-success");
+
+            var nightButton = document.getElementById(nightID);
+            nightButton.classList.remove("btn-secondary");
+            nightButton.classList.add("btn-outline-secondary");
+
+            status.value = 'off';
+        }
     }
 
     function scheduleNight(day) {
@@ -31,16 +58,29 @@
         var nightID = 'night-' + day;
         var statusID = 'status-' + day;
 
-        var dayButton = document.getElementById(dayID);
-        dayButton.classList.remove("btn-success");
-        dayButton.classList.add("btn-outline-success");
-
-        var nightButton = document.getElementById(nightID);
-        nightButton.classList.remove("btn-outline-secondary");
-        nightButton.classList.add("btn-secondary");
-
         var status = document.getElementById(statusID);
-        status.value = 'night';
+
+        if(status.value != 'night'){
+            var dayButton = document.getElementById(dayID);
+            dayButton.classList.remove("btn-success");
+            dayButton.classList.add("btn-outline-success");
+
+            var nightButton = document.getElementById(nightID);
+            nightButton.classList.remove("btn-outline-secondary");
+            nightButton.classList.add("btn-secondary");
+
+            status.value = 'night';
+        } else{
+            var dayButton = document.getElementById(dayID);
+            dayButton.classList.remove("btn-success");
+            dayButton.classList.add("btn-outline-success");
+
+            var nightButton = document.getElementById(nightID);
+            nightButton.classList.add("btn-outline-secondary");
+            nightButton.classList.remove("btn-secondary");
+            
+            status.value = 'off';
+        }
     }
 
     function sortOperatorSchedule(user){
@@ -221,6 +261,53 @@
           });
     }
 
+    function scheduleOperator(){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/operator/schedule/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
+
+    function popDate(section)
+    {
+        if(section === 'day' || section === 'wd'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-success').addClass('btn-custom-outline-success-pop');
+        }
+
+        if(section === 'night'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-secondary').addClass('btn-custom-outline-secondary-pop');
+        }
+
+        if(section === 'off' || section === 'od'){
+            $('#popDateData').val('day');
+            $('.btn-custom-outline-danger').addClass('btn-custom-outline-danger-pop');
+        }
+    }
+
+    function fieldWorkerSchedule(link){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/${link}/schedule/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
+
+    function fieldWorkerScheduleForAdmin(user){
+        var monthDropdownValue = $('#month_dropdown').val();
+        var yearDropdownValue = $('#year_dropdown').val();
+
+        if(monthDropdownValue != 'noData' && yearDropdownValue != 'noData'){
+            var redirect = `/field-admin/field-worker-schedules/${user}/${monthDropdownValue}/${yearDropdownValue}`;
+            window.location.href = redirect;
+        }
+    }
 
 
 
