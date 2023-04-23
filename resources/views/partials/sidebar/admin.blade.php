@@ -15,30 +15,8 @@
                 <span>Schedule</span>
             </a>
         </li>
-
-
-
-        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.messages' ? 'active' : '' }}  ">
-            <a href="{{ route('admin.messages') }}" class='sidebar-link'>
-                <i class="bi bi-chat-left-text-fill"></i>
-                <span>Messages </span>
-                @if (Auth::user()->messages->where('is_read', 0)->count() != 0)
-                    <span id="message-list-count"
-                        class="badge bg-danger">{{ Auth::user()->messages->where('is_read', 0)->count() }}</span>
-                @endif
-                {{-- Rework --}}
-            </a>
-        </li>
-
-        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.user-profile' ? 'active' : '' }}  ">
-            <a href="{{ route('admin.user-profile') }}" class='sidebar-link'>
-                <i class="bi bi-person-circle"></i>
-                <span>My Profile</span>
-                {{-- Rework --}}
-            </a>
-        </li>
-
-        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.assign.tickets' ? 'active' : '' }}  ">
+        
+         <li class="sidebar-item {{ Route::currentRouteName() == 'admin.assign.tickets' ? 'active' : '' }}  ">
             <a href="{{ route('admin.assign.tickets') }}" class='sidebar-link'>
                 <i class="bi bi-graph-up"></i>
                 <span>Assign Tickets</span>
@@ -54,11 +32,22 @@
             </a>
         </li>
 
-
         <li class="sidebar-item {{ Route::currentRouteName() == 'admin.users' ? 'active' : '' }}  ">
             <a href="{{ route('admin.users') }}" class='sidebar-link'>
                 <i class="bi bi-people-fill"></i>
                 <span>Manage User's</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.messages' ? 'active' : '' }}  ">
+            <a href="{{ route('admin.messages') }}" class='sidebar-link'>
+                <i class="bi bi-chat-left-text-fill"></i>
+                <span>Messages </span>
+                @if (Auth::user()->messages->where('is_read', 0)->count() != 0)
+                    <span id="message-list-count"
+                        class="badge bg-danger">{{ Auth::user()->messages->where('is_read', 0)->count() }}</span>
+                @endif
+                {{-- Rework --}}
             </a>
         </li>
 
@@ -74,6 +63,14 @@
             <a href="{{ route('admin.user.field.worker.overview') }}" class='sidebar-link'>
                 <i class="bi bi-clock-history"></i>
                 <span>Field Worker's Overview</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.user-profile' ? 'active' : '' }}  ">
+            <a href="{{ route('admin.user-profile') }}" class='sidebar-link'>
+                <i class="bi bi-person-circle"></i>
+                <span>My Profile</span>
+                {{-- Rework --}}
             </a>
         </li>
 
