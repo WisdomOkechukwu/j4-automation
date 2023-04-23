@@ -42,7 +42,7 @@
                         </div>
 
 
-                        <h4 class="card-title mt-3">Meal Ticket Information</h4>
+                        <h4 class="card-title mt-3">Engineering Schedule</h4>
                         <div class="table-responsive text-center">
                             <table class="table table-lg">
                                 <thead>
