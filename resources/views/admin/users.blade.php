@@ -440,7 +440,7 @@
                                 <span class="d-none d-sm-block">Close</span>
                             </button>
                             <button type="submit" class="btn btn-primary ml-1">
-                                Save
+                                Send
                             </button>
                         </div>
                     </form>
