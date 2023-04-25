@@ -76,8 +76,8 @@ class UserProfileController extends Controller
         $user->hmo = $request->hmo;
         $user->loan_eligibility = $request->loan_eligibility;
 
-        if($request->password === NULL){
-            $user->password = Hash::make($request->password);
+        if($request->password !== NULL){
+            $user->password = Hash::make(trim($request->password));
         }
 
         $user->save();

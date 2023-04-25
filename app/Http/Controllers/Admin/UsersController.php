@@ -46,7 +46,7 @@ class UsersController extends Controller
         $user->marital_status = $request->marital_status;
         $user->id_number = $request->id_number;
         $user->email = $request->address;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make(trim($request->password));
         $user->save();
 
         return back()->with('success', 'Added User Successfully');
