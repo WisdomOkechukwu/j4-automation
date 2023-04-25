@@ -60,7 +60,7 @@
                                     <tr>
                                         @if ($EngineeringSchedule->count() > 1)
                                             @foreach ($EngineeringSchedule as $schedule)
-                                                <td class="text-center">{{ ucwords($schedule->shift) }}</td>
+                                                <td class="text-center">{{ ucwords($schedule->is_meal) }}</td>
                                             @endforeach
                                         @else
                                             <td class="text-center">OFF</td>
