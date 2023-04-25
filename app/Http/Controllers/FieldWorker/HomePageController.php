@@ -26,6 +26,8 @@ class HomePageController extends Controller
             ->where('date', '<=', $endOfWeek)
             ->get();
         
+            dd($EngineeringSchedule);
+        
         //leave tracker
 
         return view('field.index',compact(['fieldWorkerSchedule','EngineeringSchedule']));
