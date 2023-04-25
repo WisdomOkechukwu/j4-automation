@@ -42,7 +42,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{{ route('home') }}">
                                 <!-- <img src="assets/images/logo/logo.png" alt="Logo" srcset=""> -->
                                 <h6>J4 Automation</h6>
                             </a>
