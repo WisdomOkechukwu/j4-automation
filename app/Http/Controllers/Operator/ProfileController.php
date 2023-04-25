@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $user->gender = $request->gender;
         $user->address = $request->address; 
         $user->marital_status = $request->marital_status;
-        if($request->password === NULL){
+        if($request->password !== NULL){
             $user->password = Hash::make($request->password);
         }
 
