@@ -48,6 +48,7 @@
                                                 <label class="col-form-label">Annual Leave</label>
                                             </div>
                                             <div class="col-lg-7 col-9">
+                                            <label class="col-form-label">Annual Leave</label>
                                                 <input type="text" id="first-name" class="form-control" name="fname"
                                                     placeholder="Enter Value">
                                             </div>
