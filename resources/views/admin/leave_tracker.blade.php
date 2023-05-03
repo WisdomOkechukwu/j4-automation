@@ -74,48 +74,48 @@
                                                     </td>
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="annual-leave-{{ $user->id }}"
-                                                            id="annual-leave-{{ $user->id }}"
-                                                            onclick="LoadSaveButton('annual-leave-{{ $user->id }}',{{ $user->id }})"
+                                                        <input class="form-control"
+                                                            id="all-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-annual-leave-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="casual-leave-{{ $user->id }}"
-                                                            id="casual-leave-{{ $user->id }}"
-                                                            onclick="LoadSaveButton('casual-leave-{{ $user->id }}',{{ $user->id }})"
+                                                        <input class="form-control"
+                                                            id="all-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-casual-leave-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="leave-taken-{{ $user->id }}"
-                                                            id="leave-taken-{{ $user->id }}"
-                                                            onclick="LoadSaveButton('leave-taken-{{ $user->id }}',{{ $user->id }})"
+                                                        <input class="form-control" 
+                                                            id="all-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-leave-taken-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="remaining-{{ $user->id }}"
-                                                            id="remaining-{{ $user->id }}"
+                                                        <input class="form-control"
+                                                            id="all-remaining-{{ $user->id }}"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
                                                     @else
                                                     value="0" @endif
                                                             readonly />
                                                     </td>
 
-                                                    <td class="d-none col-md-2" id="saving-button-{{ $user->id }}">
+                                                    <td class="d-none col-md-2" id="all-saving-button-{{ $user->id }}">
                                                         <button type="button" class="btn btn-primary block"
                                                             id="btn-{{ $user->id }}"
-                                                            onclick="SaveUserLeave({{ $user->id }})">
+                                                            onclick="SaveUserLeave({{ $user->id }},'all')">
                                                             Save
                                                         </button>
 
                                                     </td>
 
-                                                    <td class="d-none col-md-2" id="processing-{{ $user->id }}">
+                                                    <td class="d-none col-md-2" id="all-processing-{{ $user->id }}">
                                                         <button class="btn btn-primary" type="button" disabled>
                                                             <span class="spinner-grow spinner-grow-sm" role="status"
                                                                 aria-hidden="true"></span>
@@ -123,7 +123,7 @@
                                                         </button>
                                                     </td>
 
-                                                    <td class="d-none col-md-2" id="done-{{ $user->id }}">
+                                                    <td class="d-none col-md-2" id="all-done-{{ $user->id }}">
                                                         <button class="btn btn-success" type="button" disabled>
                                                             <i class="bi bi-check-all"></i>
                                                             Done
@@ -173,39 +173,58 @@
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="annual-leave-{{ $user->id }}"
+                                                            id="admin-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-annual-leave-{{ $user->id }}',{{ $user->id }},'admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="casual-leave-{{ $user->id }}"
+                                                            id="admin-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-casual-leave-{{ $user->id }}',{{ $user->id }},'admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control"
-                                                            name="leave-taken-{{ $user->id }}"
+                                                        <input class="form-control" 
+                                                            id="admin-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-leave-taken-{{ $user->id }}',{{ $user->id }},'admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="remaining-{{ $user->id }}"
+                                                        <input class="form-control"
+                                                            id="admin-remaining-{{ $user->id }}"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
                                                     @else
-                                                    value="0" @endif />
+                                                    value="0" @endif
+                                                            readonly />
                                                     </td>
 
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" type="hidden"
-                                                            name="id-{{ $user->id }}" value="{{ $user->id }}" />
+                                                    <td class="d-none col-md-2" id="admin-saving-button-{{ $user->id }}">
                                                         <button type="button" class="btn btn-primary block"
-                                                            data-bs-toggle="modal" data-bs-target="#bulk-leave-assign"
-                                                            onclick="bulkAssignLeave({{ $user->id }})">
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'admin')">
                                                             Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="admin-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="admin-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -252,39 +271,58 @@
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="annual-leave-{{ $user->id }}"
+                                                            id="operator-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-annual-leave-{{ $user->id }}',{{ $user->id }},'operator')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="casual-leave-{{ $user->id }}"
+                                                            id="operator-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-casual-leave-{{ $user->id }}',{{ $user->id }},'operator')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control"
-                                                            name="leave-taken-{{ $user->id }}"
+                                                        <input class="form-control" 
+                                                            id="operator-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-leave-taken-{{ $user->id }}',{{ $user->id }},'operator')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="remaining-{{ $user->id }}"
+                                                        <input class="form-control"
+                                                            id="operator-remaining-{{ $user->id }}"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
                                                     @else
-                                                    value="0" @endif />
+                                                    value="0" @endif
+                                                            readonly />
                                                     </td>
 
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" type="hidden"
-                                                            name="id-{{ $user->id }}" value="{{ $user->id }}" />
+                                                    <td class="d-none col-md-2" id="operator-saving-button-{{ $user->id }}">
                                                         <button type="button" class="btn btn-primary block"
-                                                            data-bs-toggle="modal" data-bs-target="#bulk-leave-assign"
-                                                            onclick="bulkAssignLeave({{ $user->id }})">
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'operator')">
                                                             Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="operator-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="operator-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -331,39 +369,58 @@
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="annual-leave-{{ $user->id }}"
+                                                            id="field-admin-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-annual-leave-{{ $user->id }}',{{ $user->id }},'field-admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="casual-leave-{{ $user->id }}"
+                                                            id="field-admin-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-casual-leave-{{ $user->id }}',{{ $user->id }},'field-admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control"
-                                                            name="leave-taken-{{ $user->id }}"
+                                                        <input class="form-control" 
+                                                            id="field-admin-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-leave-taken-{{ $user->id }}',{{ $user->id }},'field-admin')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="remaining-{{ $user->id }}"
+                                                        <input class="form-control"
+                                                            id="field-admin-remaining-{{ $user->id }}"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
                                                     @else
-                                                    value="0" @endif />
+                                                    value="0" @endif
+                                                            readonly />
                                                     </td>
 
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" type="hidden"
-                                                            name="id-{{ $user->id }}" value="{{ $user->id }}" />
+                                                    <td class="d-none col-md-2" id="field-admin-saving-button-{{ $user->id }}">
                                                         <button type="button" class="btn btn-primary block"
-                                                            data-bs-toggle="modal" data-bs-target="#bulk-leave-assign"
-                                                            onclick="bulkAssignLeave({{ $user->id }})">
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'field-admin')">
                                                             Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-admin-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-admin-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -402,7 +459,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($fieldWorker as $user)
+                                           @foreach ($fieldWorker as $user)
                                                 <tr>
                                                     <td class="col-md-2">
                                                         {{ $user->full_name }}
@@ -410,39 +467,57 @@
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="annual-leave-{{ $user->id }}"
+                                                            id="field-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-annual-leave-{{ $user->id }}',{{ $user->id }},'field')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
-                                                            name="casual-leave-{{ $user->id }}"
+                                                            id="field-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-casual-leave-{{ $user->id }}',{{ $user->id }},'field')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control"
-                                                            name="leave-taken-{{ $user->id }}"
+                                                        <input class="form-control" 
+                                                            id="field-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-leave-taken-{{ $user->id }}',{{ $user->id }},'field')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control" name="remaining-{{ $user->id }}"
+                                                        <input class="form-control"
+                                                            id="field-remaining-{{ $user->id }}"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
                                                     @else
-                                                    value="0" @endif />
+                                                    value="0" @endif
+                                                            readonly />
                                                     </td>
 
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" type="hidden"
-                                                            name="id-{{ $user->id }}" value="{{ $user->id }}" />
+                                                    <td class="d-none col-md-2" id="field-saving-button-{{ $user->id }}">
                                                         <button type="button" class="btn btn-primary block"
-                                                            data-bs-toggle="modal" data-bs-target="#bulk-leave-assign"
-                                                            onclick="bulkAssignLeave({{ $user->id }})">
+                                                            onclick="SaveUserLeave({{ $user->id }},'field')">
                                                             Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
                                                         </button>
                                                     </td>
                                                 </tr>
