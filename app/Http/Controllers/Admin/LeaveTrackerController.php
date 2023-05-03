@@ -9,8 +9,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-use function PHPSTORM_META\type;
-
 class LeaveTrackerController extends Controller
 {
     public function leaveTracker()
