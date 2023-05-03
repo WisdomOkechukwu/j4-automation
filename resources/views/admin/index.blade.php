@@ -2,7 +2,7 @@
 @section('content')
     <h5>J4 Insight</h5>
     <div class="row">
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -20,7 +20,7 @@
                 </div> --}}
             </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -38,7 +38,7 @@
                 </div> --}}
             </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -61,7 +61,7 @@
 
     <div class="row">
         <h5>Operator Insight</h5>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -79,7 +79,7 @@
                 </div> --}}
             </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -97,7 +97,7 @@
                 </div> --}}
             </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -120,7 +120,7 @@
 
     <div class="row">
         <h5>Field Worker Insight</h5>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">
@@ -138,7 +138,7 @@
                 </div> --}}
             </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-4 col-sm-12">
             <div class="card text-center shadow">
                 <div class="card-content">
                     <div class="card-body">

@@ -43,8 +43,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="logo">
                             <a href="{{ route('home') }}">
-                                <!-- <img src="assets/images/logo/logo.png" alt="Logo" srcset=""> -->
-                                <h6>J4 Automation</h6>
+                            <img class="w-24" src="https://admin.j4automation.org/storage/email/logo.png" style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;" width="200">
                             </a>
                         </div>
                         <div class="toggler">
