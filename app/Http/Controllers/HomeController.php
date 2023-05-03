@@ -21,6 +21,7 @@ class HomeController extends Controller
 
         switch ($role) {
             case 999:
+                dd('here');
                 return redirect()->route('admin.index');
                 break;
 
