@@ -51,7 +51,6 @@ class HomePageController extends Controller
 
         //off days for field work days
         $offDays = number_format($fieldWorkerSchedule->where('shift', 'od')->count());
-        dd('here');
         return view('admin.index', compact(['staffStrength', 'issuedTicketsNo', 'issuedTicketsCost', 'dayShift', 'nightShift', 'offShift', 'workDays', 'offDays']));
     }
 }
