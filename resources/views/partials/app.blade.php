@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>J4 Automation Dashboard</title>
     {{-- working on this later TAKE NOTE --}}
+    <link rel="icon" href="{{ asset('assets/images/J4.png') }}" type="image/x-icon"> 
     <link rel="shortcut icon" href="{{ asset('assets/images/J4.png') }}" type="image/x-icon">
 
     {{-- Font --}}
