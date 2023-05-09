@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>J4 Automation Dashboard</title>
     {{-- working on this later TAKE NOTE --}}
-    {{-- <link rel="shortcut icon" href="{{ asset('assets/images/J4logo.png') }}" type="image/x-icon"> --}}
+    {{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon"> --}}
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -43,7 +43,8 @@
                     <div class="d-flex justify-content-between">
                         <div class="logo">
                             <a href="{{ route('home') }}">
-                            <img class="w-24" src="{{ asset('assets/images/J4logo.png') }}" style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;" width="200">
+                                <!-- <img src="assets/images/logo/logo.png" alt="Logo" srcset=""> -->
+                                <h6>J4 Automation</h6>
                             </a>
                         </div>
                         <div class="toggler">

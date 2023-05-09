@@ -54,7 +54,3 @@ Route::POST('/single-assign-tickets', [TicketController::class,'singleAssignTick
 Route::POST('/multiple-assign-tickets', [TicketController::class,'multipleAssignTicket'])->name('admin.assign.multiple.tickets');
 
 Route::GET('/leave-tracker', [LeaveTrackerController::class,'leaveTracker'])->name('admin.leave.tracker');
-
-Route::POST('/leave-bulk-tracker', [LeaveTrackerController::class,'bulkAssignLeave'])->name('admin.leave.bulk.tracker');
-
-Route::GET('/leave-single-tracker/{user}/{annual}/{casual}/{taken}', [LeaveTrackerController::class,'singleLeaveAssign']);

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Helper\EmailHelper;
 use App\Models\BulkMessages;
 use App\Models\Messages;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,22 +66,6 @@ class MessageController extends Controller
                 $message->is_bulk = 1;
                 $message->bulk_id = $bulkMessages->id;
                 $message->save();
-
-                $body = 'New message sent from '.Auth::user()->full_name.' Check your inbox to see message';
-                $subject = 'Message Notification';
-
-                $user = User::find($id);
-
-                if($user->role_id == 777){
-                    $route = route('field.admin.messages');
-                } elseif($user->role_id == 779){
-                    $route = route('field.worker.messages');
-                } elseif($user->role_id == 889){
-                    $route = route('operator.profile.messages');
-                } elseif($user->role_id == 999){
-                    $route = route('admin.messages');
-                }
-                EmailHelper::send($user, $subject, $body, true, 'Show Inbox', $route);
             endif;
         }
 
@@ -102,21 +84,6 @@ class MessageController extends Controller
         $message->is_bulk = 0;
         $message->bulk_id = null;
         $message->save();
-
-        $body = 'New message sent from '.Auth::user()->full_name.' Check your inbox to see message';
-        $subject = 'Message Notification';
-
-        if($user->role_id == 777){
-            $route = route('field.admin.messages');
-        } elseif($user->role_id == 779){
-            $route = route('field.worker.messages');
-        } elseif($user->role_id == 889){
-            $route = route('operator.profile.messages');
-        } elseif($user->role_id == 999){
-            $route = route('admin.messages');
-        }
-        
-        EmailHelper::send(User::find($user->id), $subject, $body, true, 'Show Inbox', $route);
 
         $fullName = $user->first_name . ' ' . $user->last_name;
         return back()->with('success', "Message sent to $fullName successfully.");

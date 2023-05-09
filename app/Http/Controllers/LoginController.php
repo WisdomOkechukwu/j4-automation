@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     public function __construct()
@@ -30,5 +32,6 @@ class LoginController extends Controller
         }
 
         return redirect()->intended();
+        // return redirect()->route('home');
     }
 }

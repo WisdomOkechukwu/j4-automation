@@ -1,5 +1,7 @@
 <div class="sidebar-menu">
     <ul class="menu">
+        <li class="sidebar-title">Menu</li>
+
         <li class="sidebar-item {{ Route::currentRouteName() == 'operator.index' ? 'active' : '' }} ">
             <a href="{{ route('operator.index') }}" class='sidebar-link'>
                 <i class="bi bi-house-fill"></i>

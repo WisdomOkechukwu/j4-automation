@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\CalendarHelperController;
-use App\Http\Controllers\Helper\EmailHelper;
 use App\Models\EngineeringSchedule;
 use App\Models\FieldWorkerSchedule;
 use App\Models\User;
@@ -92,20 +91,6 @@ class ScheduleFieldController extends Controller
                 $fieldWorkerSchedule->save();
             }
         }
-
-        $emailDate = Carbon::parse($year . '-' . $month . '-' . 1);
-        $user = User::find($request->user);
-        $body = 'Your schedule for '.$emailDate->format('M Y').' has been updated. Click on the button below to view your schedule';
-        $subject = 'Schedule Notification';
-        $route = route('login');
-
-        if($user->role_id == 777){
-            $route = route('field.worker.schedule',['month'=> $month, 'year'=> $year]);
-        } elseif($user->role_id == 779){
-            $route = route('field.admin.schedule',['month'=> $month, 'year'=> $year]);
-        }
-
-        EmailHelper::send($user, $subject, $body, true, 'Show Schedule', $route);
 
         return back()->with('success', 'Data Saved Successfully');
     }

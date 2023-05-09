@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\CalendarHelperController;
-use App\Http\Controllers\Helper\EmailHelper;
 use App\Models\MealTicket;
 use App\Models\OperatorSchedule;
 use App\Models\User;
@@ -92,12 +91,6 @@ class ScheduleOperatorController extends Controller
             }
         }
 
-        $user = User::find($request->user);
-        $body = 'Your schedule for '.$date->format('M Y').' has been updated. Click on the button below to view your schedule';
-        $subject = 'Schedule Notification';
-        $route = route('operator.schedule',['month'=> $month, 'year'=> $year]);
-
-        EmailHelper::send($user, $subject, $body, true, 'Show Schedule', $route);
         return back()->with('success', 'Data Saved Successfully');
     }
 
