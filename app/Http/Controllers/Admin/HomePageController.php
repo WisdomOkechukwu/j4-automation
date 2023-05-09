@@ -14,7 +14,6 @@ class HomePageController extends Controller
     public static function index()
     {
         try {
-            logger('data started');
             $startOfMonth = now()->startOfMonth();
             $endOfMonth = now()->endOfMonth();
 
