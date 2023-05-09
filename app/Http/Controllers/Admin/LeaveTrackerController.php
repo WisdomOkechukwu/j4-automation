@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Mail\NotificationMail;
 use App\Models\LeaveTracker;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class LeaveTrackerController extends Controller
 {
@@ -19,8 +17,6 @@ class LeaveTrackerController extends Controller
         $operators = $users->where('role_id', 889);
         $fieldAdmin = $users->where('role_id', 779);
         $fieldWorker = $users->where('role_id', 777);
-
-        // dd($admins);
 
         return view('admin.leave_tracker', compact(['operators', 'fieldAdmin', 'fieldWorker', 'users', 'admins']));
     }
@@ -88,7 +84,7 @@ class LeaveTrackerController extends Controller
         $leaveTracker = LeaveTracker::where('user_id', $user)
             ->where('year', now()->year)
             ->first();
-
+            
             if ($leaveTracker) {
                 $leaveTracker->annual_leave = $annual;
                 $leaveTracker->casual_leave = $casual;
@@ -97,7 +93,7 @@ class LeaveTrackerController extends Controller
                 $leaveTracker->save();
             } else {
                 $leaveTracker = new LeaveTracker();
-                $leaveTracker->user_id = $user->id;
+                $leaveTracker->user_id = $user;
                 $leaveTracker->annual_leave = $annual;
                 $leaveTracker->casual_leave = $casual;
                 $leaveTracker->remaining = $annual + $casual - $taken;
