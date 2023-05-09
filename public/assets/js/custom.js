@@ -330,8 +330,11 @@ $(document).ready(function() {
         var annual = $(`#${type}-annual-leave-${ user }`).val();
         var casual = $(`#${type}-casual-leave-${ user }`).val();
         var taken = $(`#${type}-leave-taken-${ user }`).val();
+        console.log('in progress');
 
         $.get(`/admin/leave-single-tracker/${user}/${annual}/${casual}/${taken}`, function(data){
+            console.log('done');
+            console.log(data);
             $(`#${type}-saving-button-${ user }`).removeClass('d-block').addClass('d-none');
             $(`#${type}-processing-${ user }`).removeClass('d-none').addClass('d-block').fadeIn();
             if(data.success === true){
