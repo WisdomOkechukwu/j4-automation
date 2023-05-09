@@ -37,9 +37,11 @@
                         <div class="app-brand justify-content-center">
                             <a href="index.html" class="app-brand-link gap-2">
                                 <span class="app-brand-logo demo">
-
+                                    <img class="w-24" src="{{ asset('assets/images/J4logo.png') }}"
+                                        style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;"
+                                        width="200">
                                 </span>
-                                <h3 class="app-brand-text demo text-body fw-bolder">J4 Automations</h3>
+                                {{-- <h3 class="app-brand-text demo text-body fw-bolder">J4 Automations</h3> --}}
                             </a>
                         </div>
                         <!-- /Logo -->

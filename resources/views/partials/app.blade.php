@@ -41,7 +41,9 @@
                     <div class="d-flex justify-content-between">
                         <div class="logo">
                             <a href="{{ route('home') }}">
-                            <img class="w-24" src="{{ asset('assets/images/J4logo.png') }}" style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;" width="200">
+                                <img class="w-24" src="{{ asset('assets/images/J4logo.png') }}"
+                                    style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;"
+                                    width="200">
                             </a>
                         </div>
                         <div class="toggler">
@@ -122,12 +124,13 @@
                                     <li><a class="dropdown-item" href="{{ route('admin.user-profile') }}"><i
                                                 class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="#" 
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
                                 </ul>
                             </div>
                         </div>
@@ -154,10 +157,9 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/fh-3.1.7/r-2.2.5/datatables.min.js">
-
-    <script>
-        // Simple Datatable
-        let table = document.querySelector('.users-table');
+        < script >
+            // Simple Datatable
+            let table = document.querySelector('.users-table');
         let dataTable = new simpleDatatables.DataTable(table);
     </script>
 
