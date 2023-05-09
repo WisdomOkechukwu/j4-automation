@@ -7,7 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>404 - Not Found</title>
+	<title>500</title>
+	<link rel="icon" href="{{ asset('assets/images/J4.png') }}" type="image/x-icon"> 
+    <link rel="shortcut icon" href="{{ asset('assets/images/J4.png') }}" type="image/x-icon">
 
 	<!-- Google font -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
