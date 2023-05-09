@@ -11,26 +11,31 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
-    public function schedule($month = null, $year = null){
-        $user = Auth::user();
-        $month = $month ?: now()->month;
-        $year = $year ?: now()->year;
+    public function schedule($month = null, $year = null)
+    {
+        try {
+            $user = Auth::user();
+            $month = $month ?: now()->month;
+            $year = $year ?: now()->year;
 
-        $firstDayOfTheMonth = "$year-$month-01";
+            $firstDayOfTheMonth = "$year-$month-01";
 
-        $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
-        $endOfMonth = $startOfMonth->copy()->endOfMonth();
+            $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
+            $endOfMonth = $startOfMonth->copy()->endOfMonth();
 
-        $daysInAMonth = $startOfMonth->copy()->daysInMonth;
-        $segment = $startOfMonth->format('F Y');
+            $daysInAMonth = $startOfMonth->copy()->daysInMonth;
+            $segment = $startOfMonth->format('F Y');
 
-        $days = (new ScheduleFieldController())->generateFieldWorkerCalendar($month, $year, $user);
+            $days = (new ScheduleFieldController())->generateFieldWorkerCalendar($month, $year, $user);
 
-        $calendar = CalendarHelperController::calendarGenerator();
-        $months = $calendar[1];
-        $years = $calendar[0];
+            $calendar = CalendarHelperController::calendarGenerator();
+            $months = $calendar[1];
+            $years = $calendar[0];
 
-        $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
-        return view('field.schedule', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+            $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
+            return view('field.schedule', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+        } catch (\Exception $exception) {
+            logger('Schedule Page ' . $exception->getMessage());
+        }
     }
 }

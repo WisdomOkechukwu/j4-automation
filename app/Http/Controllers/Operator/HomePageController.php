@@ -12,32 +12,34 @@ class HomePageController extends Controller
 {
     public function index()
     {
-        //schedule for the week
-        $startOfWeek = now()->startOfWeek();
-        $endOfWeek = now()->endOfWeek();
+        try {
+            //schedule for the week
+            $startOfWeek = now()->startOfWeek();
+            $endOfWeek = now()->endOfWeek();
 
-        $operatorSchedule = OperatorSchedule::where('user_id', Auth::user()->id)
-            ->where('date', '>=', $startOfWeek)
-            ->where('date', '<=', $endOfWeek)
-            ->get();
+            $operatorSchedule = OperatorSchedule::where('user_id', Auth::user()->id)
+                ->where('date', '>=', $startOfWeek)
+                ->where('date', '<=', $endOfWeek)
+                ->get();
 
+            //Meal TIcket Information
+            $startOfMonth = now()->startOfMonth();
+            $endOfMonth = now()->endOfMonth();
 
-        //Meal TIcket Information
-        $startOfMonth = now()->startOfMonth();
-        $endOfMonth = now()->endOfMonth();
+            $mealTicket = MealTicket::where('user_id', Auth::user()->id)
+                ->where('date', '>=', $startOfMonth)
+                ->where('date', '<=', $endOfMonth)
+                ->first();
 
-        $mealTicket = MealTicket::where('user_id', Auth::user()->id)
-        ->where('date', '>=', $startOfMonth)
-        ->where('date', '<=', $endOfMonth)
-        ->first();
-        
-        // dd($mealTicket);
+            // dd($mealTicket);
 
-        //Leave Tracker 
-        //still pending
+            //Leave Tracker
+            //still pending
 
-        //rework on this view
-        return view('operator.index',compact(['operatorSchedule','mealTicket']));
-
+            //rework on this view
+            return view('operator.index', compact(['operatorSchedule', 'mealTicket']));
+        } catch (\Exception $exception) {
+            logger('Operator Home Page ' . $exception->getMessage());
+        }
     }
 }

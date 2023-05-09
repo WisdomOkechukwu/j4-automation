@@ -12,25 +12,29 @@ class FieldWorkersTrackingsOverviewController extends Controller
 {
     public function fieldWorkerOverview($month = null, $year = null)
     {
-        $month = $month ?: now()->month;
-        $year = $year ?: now()->year;
+        try {
+            $month = $month ?: now()->month;
+            $year = $year ?: now()->year;
 
-        $firstDayOfTheMonth = "$year-$month-01";
+            $firstDayOfTheMonth = "$year-$month-01";
 
-        $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
-        $endOfMonth = $startOfMonth->copy()->endOfMonth();
+            $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
+            $endOfMonth = $startOfMonth->copy()->endOfMonth();
 
-        $daysInAMonth = $startOfMonth->copy()->daysInMonth;
-        $segment = $startOfMonth->format('F Y');
+            $daysInAMonth = $startOfMonth->copy()->daysInMonth;
+            $segment = $startOfMonth->format('F Y');
 
-        $currentMonth = $this->generateFieldWorkerCalendar($month, $year);
+            $currentMonth = $this->generateFieldWorkerCalendar($month, $year);
 
-        $calendar = CalendarHelperController::calendarGenerator();
-        $months = $calendar[1];
-        $years = $calendar[0];
+            $calendar = CalendarHelperController::calendarGenerator();
+            $months = $calendar[1];
+            $years = $calendar[0];
 
-        $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($currentMonth);
-        return view('admin.field_worker_schedule_overview', compact(['currentMonth', 'segment', 'months', 'years', 'noOfWeeks']));
+            $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($currentMonth);
+            return view('admin.field_worker_schedule_overview', compact(['currentMonth', 'segment', 'months', 'years', 'noOfWeeks']));
+        } catch (\Exception $exception) {
+            logger('Field Worker Overview Error ' . $exception->getMessage());
+        }
     }
 
     public function generateFieldWorkerCalendar($month, $year)

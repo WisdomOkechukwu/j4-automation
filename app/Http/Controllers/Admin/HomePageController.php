@@ -54,7 +54,7 @@ class HomePageController extends Controller
             $offDays = number_format($fieldWorkerSchedule->where('shift', 'od')->count());
             return view('admin.index', compact(['staffStrength', 'issuedTicketsNo', 'issuedTicketsCost', 'dayShift', 'nightShift', 'offShift', 'workDays', 'offDays']));
         } catch (\Exception $exception) {
-            logger($exception->getMessage());
+            logger('Home Error ' . $exception->getMessage());
         }
     }
 }

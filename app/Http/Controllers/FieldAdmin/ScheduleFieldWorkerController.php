@@ -13,39 +13,46 @@ class ScheduleFieldWorkerController extends Controller
 {
     public function allSchedules()
     {
-        $users = User::with('role')
-            ->where('role_id', 777)
-            ->get();
+        try {
+            $users = User::with('role')
+                ->where('role_id', 777)
+                ->get();
 
-        return view('field.field-workers', compact(['users']));
+            return view('field.field-workers', compact(['users']));
+        } catch (\Exception $exception) {
+            logger('Field Worker ' . $exception->getMessage());
+        }
     }
 
     public function scheduleFieldWorker(User $user, $month = null, $year = null)
     {
-        $month = $month ?: now()->month;
-        $year = $year ?: now()->year;
+        try {
+            $month = $month ?: now()->month;
+            $year = $year ?: now()->year;
 
-        $firstDayOfTheMonth = "$year-$month-01";
+            $firstDayOfTheMonth = "$year-$month-01";
 
-        $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
-        $endOfMonth = $startOfMonth->copy()->endOfMonth();
+            $startOfMonth = Carbon::parse($firstDayOfTheMonth)->startOfMonth();
+            $endOfMonth = $startOfMonth->copy()->endOfMonth();
 
-        $daysInAMonth = $startOfMonth->copy()->daysInMonth;
-        $segment = $startOfMonth->format('F Y');
+            $daysInAMonth = $startOfMonth->copy()->daysInMonth;
+            $segment = $startOfMonth->format('F Y');
 
-        $days = (new ScheduleFieldController())->generateFieldWorkerCalendar($month, $year, $user);
+            $days = (new ScheduleFieldController())->generateFieldWorkerCalendar($month, $year, $user);
 
-        $calendar = CalendarHelperController::calendarGenerator();
-        $months = $calendar[1];
-        $years = $calendar[0];
+            $calendar = CalendarHelperController::calendarGenerator();
+            $months = $calendar[1];
+            $years = $calendar[0];
 
-        $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
-        return view('field.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+            $noOfWeeks = (new ScheduleFieldController())->noOfWeeks($days);
+            return view('field.schedule_field_worker', compact(['days', 'months', 'years', 'segment', 'month', 'year', 'user', 'noOfWeeks', 'daysInAMonth']));
+        } catch (\Exception $exception) {
+            logger('Field Worker Action ' . $exception->getMessage());
+        }
     }
 
     public function scheduleFieldWorkerAction(Request $request)
     {
         return (new ScheduleFieldController())->scheduleFieldWorkerAction($request);
     }
-
 }

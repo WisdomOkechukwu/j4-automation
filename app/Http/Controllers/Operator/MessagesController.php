@@ -11,13 +11,16 @@ class MessagesController extends Controller
 {
     public function messages()
     {
-        $messages = Messages::with(['sender'])
-            ->where('receiver_id', Auth::user()->id)
-            ->orderBy('created_at', 'DESC')
-            ->get();
+        try {
+            $messages = Messages::with(['sender'])
+                ->where('receiver_id', Auth::user()->id)
+                ->orderBy('created_at', 'DESC')
+                ->get();
 
-        //rework on this view
-        return view('messages', compact(['messages']));
+            //rework on this view
+            return view('messages', compact(['messages']));
+        } catch (\Exception $exception) {
+            logger('Messages Error ' . $exception->getMessage());
+        }
     }
-
 }

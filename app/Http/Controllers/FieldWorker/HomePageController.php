@@ -12,22 +12,26 @@ class HomePageController extends Controller
 {
     public function index()
     {
-        //schedule for the week
-        $startOfWeek = now()->startOfWeek();
-        $endOfWeek = now()->endOfWeek();
+        try {
+            //schedule for the week
+            $startOfWeek = now()->startOfWeek();
+            $endOfWeek = now()->endOfWeek();
 
-        $fieldWorkerSchedule = FieldWorkerSchedule::where('user_id', Auth::user()->id)
-            ->where('date', '>=', $startOfWeek)
-            ->where('date', '<=', $endOfWeek)
-            ->get();
+            $fieldWorkerSchedule = FieldWorkerSchedule::where('user_id', Auth::user()->id)
+                ->where('date', '>=', $startOfWeek)
+                ->where('date', '<=', $endOfWeek)
+                ->get();
 
-        $EngineeringSchedule = EngineeringSchedule::where('user_id', Auth::user()->id)
-            ->where('date', '>=', $startOfWeek)
-            ->where('date', '<=', $endOfWeek)
-            ->get();
-        
-        //leave tracker
+            $EngineeringSchedule = EngineeringSchedule::where('user_id', Auth::user()->id)
+                ->where('date', '>=', $startOfWeek)
+                ->where('date', '<=', $endOfWeek)
+                ->get();
 
-        return view('field.index',compact(['fieldWorkerSchedule','EngineeringSchedule']));
+            //leave tracker
+
+            return view('field.index', compact(['fieldWorkerSchedule', 'EngineeringSchedule']));
+        } catch (\Exception $exception) {
+            logger('Field Home Page ' . $exception->getMessage());
+        }
     }
 }

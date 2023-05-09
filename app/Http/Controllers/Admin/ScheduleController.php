@@ -12,15 +12,18 @@ class ScheduleController extends Controller
 {
     public function allSchedules()
     {
-        $users = User::with('role')
-            ->whereNot('role_id', 999)
-            ->get();
-        
+        try {
+            $users = User::with('role')
+                ->whereNot('role_id', 999)
+                ->get();
 
-        $operators = $users->where('role_id', 889);
-        $fieldAdmin = $users->where('role_id', 779);
-        $fieldWorker = $users->where('role_id', 777);
+            $operators = $users->where('role_id', 889);
+            $fieldAdmin = $users->where('role_id', 779);
+            $fieldWorker = $users->where('role_id', 777);
 
-        return view('admin.all_schedules', compact(['operators', 'fieldAdmin', 'fieldWorker','users']));
+            return view('admin.all_schedules', compact(['operators', 'fieldAdmin', 'fieldWorker', 'users']));
+        } catch (\Exception $exception) {
+            logger('All Schedule Error ' . $exception->getMessage());
+        }
     }
 }
