@@ -43,27 +43,14 @@
                                     <div class="col-md-4">
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group row align-items-center">
-                                            <div class="col-lg-5 col-3">
-                                                <label class="col-form-label">Annual Leave</label>
-                                            </div>
-                                            <div class="col-lg-7 col-9">
-                                            <label class="col-form-label">Annual Leave</label>
-                                                <input type="text" id="first-name" class="form-control" name="fname"
-                                                    placeholder="Enter Value">
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group row align-items-center">
-                                            <div class="col-lg-5 col-3">
-                                                <label class="col-form-label">Casual Leave</label>
-                                            </div>
-                                            <div class="col-lg-7 col-9">
-                                                <input type="text" id="first-name" class="form-control" name="fname"
-                                                    placeholder="Enter Value">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#bulk-leave-assign" onclick="bulkAssignLeave('All')">
+                                            Bulk Assign
+                                        </button>
                                     </div>
                                 </div>
 
@@ -88,28 +75,59 @@
                                                     <td class="col-md-2">{{ $user->role->name }}</td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
+                                                            id="all-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-annual-leave-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
                                                         <input class="form-control"
+                                                            id="all-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-casual-leave-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <input class="form-control"
+                                                        <input class="form-control" 
+                                                            id="all-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('all-leave-taken-{{ $user->id }}',{{ $user->id }},'all')"
                                                             @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
                                                     </td>
                                                     <td class="col-md-2">
-                                                        @if ($user->leave_tracker)
-                                                            {{ $user->leave_tracker->remaining }}
-                                                        @else
-                                                            0
-                                                        @endif
+                                                        <input class="form-control"
+                                                            id="all-remaining-{{ $user->id }}"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
+                                                    @else
+                                                    value="0" @endif
+                                                            readonly />
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="all-saving-button-{{ $user->id }}">
+                                                        <button type="button" class="btn btn-primary block"
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'all')">
+                                                            Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="all-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="all-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -118,287 +136,401 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Annual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Casual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="tab-pane fade mt-4" id="admin" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-4">
                                     </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#bulk-leave-assign" onclick="bulkAssignLeave('Admin')">
+                                            Bulk Assign
+                                        </button>
+                                    </div>
+                                </div>
 
-                                    <div class="table-responsive text-center">
-                                        <table class="table table-lg users-table-operator">
-                                            <thead>
+                                <div class="table-responsive text-center">
+                                    <table class="table table-lg users-table-admin">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Role</th>
+                                                <th class="text-center">Annual Leave</th>
+                                                <th class="text-center">Casual Leave</th>
+                                                <th class="text-center">Leave Taken</th>
+                                                <th class="text-center">Remaining</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($admins as $user)
                                                 <tr>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Role</th>
-                                                    <th class="text-center">Annual Leave</th>
-                                                    <th class="text-center">Casual Leave</th>
-                                                    <th class="text-center">Leave Taken</th>
-                                                    <th class="text-center">Remaining</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($users as $user)
-                                                    <tr>
-                                                        <td class="col-md-2">
-                                                            {{ $user->full_name }}
-                                                        </td>
-                                                        <td class="col-md-2">{{ $user->role->name }}</td>
-                                                        <td class="col-md-2">
-                                                            <input class="form-control"
-                                                                @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
+                                                    <td class="col-md-2">
+                                                        {{ $user->full_name }}
+                                                    </td>
+                                                    <td class="col-md-2">{{ $user->role->name }}</td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="admin-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-annual-leave-{{ $user->id }}',{{ $user->id }},'admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
                                                     @else
                                                     value="0" @endif />
-                                                        </td>
-                                                        <td class="col-md-2">
-                                                            <input class="form-control"
-                                                                @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="admin-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-casual-leave-{{ $user->id }}',{{ $user->id }},'admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
                                                     @else
                                                     value="0" @endif />
-                                                        </td>
-                                                        <td class="col-md-2">
-                                                            <input class="form-control"
-                                                                @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control" 
+                                                            id="admin-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('admin-leave-taken-{{ $user->id }}',{{ $user->id }},'admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
                                                     @else
                                                     value="0" @endif />
-                                                        </td>
-                                                        <td class="col-md-2">
-                                                            @if ($user->leave_tracker)
-                                                                {{ $user->leave_tracker->remaining }}
-                                                            @else
-                                                                0
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="admin-remaining-{{ $user->id }}"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
+                                                    @else
+                                                    value="0" @endif
+                                                            readonly />
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="admin-saving-button-{{ $user->id }}">
+                                                        <button type="button" class="btn btn-primary block"
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'admin')">
+                                                            Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="admin-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="admin-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Annual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Casual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="tab-pane fade mt-4" id="operator" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-4">
                                     </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#bulk-leave-assign" onclick="bulkAssignLeave('Operator')">
+                                            Bulk Assign
+                                        </button>
+                                    </div>
+                                </div>
 
-                                    <div class="table-responsive text-center">
-                                        <table class="table table-lg users-table-operator">
-                                            <thead>
+                                <div class="table-responsive text-center">
+                                    <table class="table table-lg users-table-operator">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Role</th>
+                                                <th class="text-center">Annual Leave</th>
+                                                <th class="text-center">Casual Leave</th>
+                                                <th class="text-center">Leave Taken</th>
+                                                <th class="text-center">Remaining</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($operators as $user)
                                                 <tr>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Role</th>
-                                                    <th class="text-center">Annual Leave</th>
-                                                    <th class="text-center">Casual Leave</th>
-                                                    <th class="text-center">Leave Taken</th>
-                                                    <th class="text-center">Remaining</th>
+                                                    <td class="col-md-2">
+                                                        {{ $user->full_name }}
+                                                    </td>
+                                                    <td class="col-md-2">{{ $user->role->name }}</td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="operator-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-annual-leave-{{ $user->id }}',{{ $user->id }},'operator')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="operator-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-casual-leave-{{ $user->id }}',{{ $user->id }},'operator')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control" 
+                                                            id="operator-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('operator-leave-taken-{{ $user->id }}',{{ $user->id }},'operator')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="operator-remaining-{{ $user->id }}"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
+                                                    @else
+                                                    value="0" @endif
+                                                            readonly />
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="operator-saving-button-{{ $user->id }}">
+                                                        <button type="button" class="btn btn-primary block"
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'operator')">
+                                                            Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="operator-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="operator-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
+                                                        </button>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-md-2">
-                                                        Daniel Craig
-                                                    </td>
-                                                    <td class="col-md-2">Field</td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        20
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Annual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Casual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="tab-pane fade mt-4" id="field-admin" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-4">
                                     </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#bulk-leave-assign" onclick="bulkAssignLeave('FieldAdmin')">
+                                            Bulk Assign
+                                        </button>
+                                    </div>
+                                </div>
 
-                                    <div class="table-responsive text-center">
-                                        <table class="table table-lg users-table-operator">
-                                            <thead>
+                                <div class="table-responsive text-center">
+                                    <table class="table table-lg users-table-field-admin">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Role</th>
+                                                <th class="text-center">Annual Leave</th>
+                                                <th class="text-center">Casual Leave</th>
+                                                <th class="text-center">Leave Taken</th>
+                                                <th class="text-center">Remaining</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($fieldAdmin as $user)
                                                 <tr>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Role</th>
-                                                    <th class="text-center">Annual Leave</th>
-                                                    <th class="text-center">Casual Leave</th>
-                                                    <th class="text-center">Leave Taken</th>
-                                                    <th class="text-center">Remaining</th>
+                                                    <td class="col-md-2">
+                                                        {{ $user->full_name }}
+                                                    </td>
+                                                    <td class="col-md-2">{{ $user->role->name }}</td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-admin-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-annual-leave-{{ $user->id }}',{{ $user->id }},'field-admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-admin-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-casual-leave-{{ $user->id }}',{{ $user->id }},'field-admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control" 
+                                                            id="field-admin-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-admin-leave-taken-{{ $user->id }}',{{ $user->id }},'field-admin')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-admin-remaining-{{ $user->id }}"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
+                                                    @else
+                                                    value="0" @endif
+                                                            readonly />
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-admin-saving-button-{{ $user->id }}">
+                                                        <button type="button" class="btn btn-primary block"
+                                                            id="btn-{{ $user->id }}"
+                                                            onclick="SaveUserLeave({{ $user->id }},'field-admin')">
+                                                            Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-admin-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-admin-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
+                                                        </button>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-md-2">
-                                                        Daniel Craig
-                                                    </td>
-                                                    <td class="col-md-2">Field</td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        20
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="mt-4">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Annual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group row align-items-center">
-                                                <div class="col-lg-5 col-3">
-                                                    <label class="col-form-label">Casual Leave</label>
-                                                </div>
-                                                <div class="col-lg-7 col-9">
-                                                    <input type="text" id="first-name" class="form-control"
-                                                        name="fname" placeholder="Enter Value">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="tab-pane fade mt-4" id="field" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-4">
                                     </div>
-
-                                    <div class="table-responsive text-center">
-                                        <table class="table table-lg users-table-operator">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Role</th>
-                                                    <th class="text-center">Annual Leave</th>
-                                                    <th class="text-center">Casual Leave</th>
-                                                    <th class="text-center">Leave Taken</th>
-                                                    <th class="text-center">Remaining</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-md-2">
-                                                        Daniel Craig
-                                                    </td>
-                                                    <td class="col-md-2">Field</td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <input class="form-control" value="4" />
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        20
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                            data-bs-target="#bulk-leave-assign" onclick="bulkAssignLeave('FieldWorker')">
+                                            Bulk Assign
+                                        </button>
                                     </div>
                                 </div>
+
+                                <div class="table-responsive text-center">
+                                    <table class="table table-lg users-table-field">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Role</th>
+                                                <th class="text-center">Annual Leave</th>
+                                                <th class="text-center">Casual Leave</th>
+                                                <th class="text-center">Leave Taken</th>
+                                                <th class="text-center">Remaining</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @foreach ($fieldWorker as $user)
+                                                <tr>
+                                                    <td class="col-md-2">
+                                                        {{ $user->full_name }}
+                                                    </td>
+                                                    <td class="col-md-2">{{ $user->role->name }}</td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-annual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-annual-leave-{{ $user->id }}',{{ $user->id }},'field')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->annual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-casual-leave-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-casual-leave-{{ $user->id }}',{{ $user->id }},'field')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->casual_leave }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control" 
+                                                            id="field-leave-taken-{{ $user->id }}"
+                                                            onclick="LoadSaveButton('field-leave-taken-{{ $user->id }}',{{ $user->id }},'field')"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->leave_taken }}"
+                                                    @else
+                                                    value="0" @endif />
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <input class="form-control"
+                                                            id="field-remaining-{{ $user->id }}"
+                                                            @if ($user->leave_tracker) value="{{ $user->leave_tracker->remaining }}"
+                                                    @else
+                                                    value="0" @endif
+                                                            readonly />
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-saving-button-{{ $user->id }}">
+                                                        <button type="button" class="btn btn-primary block"
+                                                            onclick="SaveUserLeave({{ $user->id }},'field')">
+                                                            Save
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-processing-{{ $user->id }}">
+                                                        <button class="btn btn-primary" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            Processing
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="d-none col-md-2" id="field-done-{{ $user->id }}">
+                                                        <button class="btn btn-success" type="button" disabled>
+                                                            <i class="bi bi-check-all"></i>
+                                                            Done
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
+
                         </div>
 
-                        <div class="row mt-4">
+                        {{-- <div class="row mt-4">
                             <div class="col-md-12">
                                 <div class="form-group row align-items-center">
                                     <div class="col-lg-10 col-10">
@@ -408,10 +540,54 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="bulk-leave-assign" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title" id="bulk-leave">
+                        Add New User
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                @csrf
+                <div class="modal-body">
+                    <div class="card">
+                        <form action={{ route('admin.leave.bulk.tracker') }} method="POST">
+                            @csrf
+                            <input class="form-control" type="hidden" name="type" id="bulk-leave-type" />
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="annual_leave" class="form-label">Annual Leave</label>
+                                    <input class="form-control" type="number" name="annual_leave" autofocus required />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="casual_leave" class="form-label">Casual Leave</label>
+                                    <input class="form-control" type="number" name="casual_leave" />
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{-- <div class="modal-footer"> --}}
+                {{-- <button type="submit" class="btn btn-primary ml-1">
+                                Add User
+                            </button> --}}
+                {{-- </div> --}}
+            </div>
+        </div>
+    </div>
 @endsection

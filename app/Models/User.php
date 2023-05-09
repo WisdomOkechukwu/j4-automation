@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function leave_tracker():HasOne
     {
-        return $this->hasOne(LeaveTracker::class, 'user_id', 'id')->ofMany('year', 'max');
+        return $this->hasOne(LeaveTracker::class, 'user_id', 'id')->where('year', now()->year)->latest();
     }
 
     public function messages() :HasMany
