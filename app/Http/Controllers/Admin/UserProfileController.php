@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helper\EmailHelper;
 use App\Http\Controllers\Helper\ImageResize;
 use App\Models\Role;
 use App\Models\User;
@@ -81,6 +82,20 @@ class UserProfileController extends Controller
         }
 
         $user->save();
+        
+        $body = 'Your profile has been updated. Click the button below to check your profile to see changes';
+        $subject = 'Profile Update Notification';
+
+        if($user->role_id == 777){
+            $route = route('field.worker.profile');
+        } elseif($user->role_id == 779){
+            $route = route('field.admin.profile');
+        } elseif($user->role_id == 889){
+            $route = route('operator.profile');
+        }
+
+        EmailHelper::send($user, $subject, $body, true, 'Show Profile', $route);
+
         return back()->with('success', 'User Information Updated');
     }
 

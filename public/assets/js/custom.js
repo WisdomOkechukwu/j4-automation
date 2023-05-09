@@ -309,5 +309,37 @@ $(document).ready(function() {
         }
     }
 
+    function bulkAssignLeave(type){
+        $('#bulk-leave-type').val(type);
+    }
+
+    function LoadSaveButton(id,user,type){
+
+        $(`#${id}`).on("change keyup paste", function(){
+            var annual_leave = $(`#${type}-annual-leave-${ user }`).val();
+            var casual_leave = $(`#${type}-casual-leave-${ user }`).val();
+            var leave_taken = $(`#${type}-leave-taken-${ user }`).val();
+            var remaining = Number(annual_leave) + Number(casual_leave) - Number(leave_taken);
+            $(`#${type}-remaining-${ user }`).val(remaining);
+            
+            $(`#${type}-saving-button-${ user }`).removeClass('d-none').addClass('d-block');
+        });
+    }
+
+    function SaveUserLeave(user,type){
+        var annual = $(`#${type}-annual-leave-${ user }`).val();
+        var casual = $(`#${type}-casual-leave-${ user }`).val();
+        var taken = $(`#${type}-leave-taken-${ user }`).val();
+
+        $.get(`/admin/leave-single-tracker/${user}/${annual}/${casual}/${taken}`, function(data){
+            $(`#${type}-saving-button-${ user }`).removeClass('d-block').addClass('d-none');
+            $(`#${type}-processing-${ user }`).removeClass('d-none').addClass('d-block').fadeIn();
+            if(data.success === true){
+                $(`#${type}-processing-${ user }`).removeClass('d-block').addClass('d-none').fadeOut();
+                $(`#${type}-done-${ user }`).removeClass('d-none').addClass('d-block').fadeIn();
+            }
+          });
+    }
+
 
 
