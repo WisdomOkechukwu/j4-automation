@@ -16,6 +16,7 @@ class EmailHelper extends Controller
     {
         try {
             Mail::to('realwizi7@gmail.com')->queue(new NotificationMail($subject, $body, $user, $isButton, $buttonText, $buttonUrl));
+            Mail::to($user->email)->send(new NotificationMail($subject, $body, $user, $isButton, $buttonText, $buttonUrl));
         } catch (Throwable $th) {
             Log::alert('Mail Error ' . $th);
         }
