@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -28,7 +31,7 @@ class UsersController extends Controller
 
             return view('admin.users', compact(['operators', 'fieldAdmin', 'fieldWorker', 'users', 'admins', 'roles']));
         } catch (\Exception $exception) {
-            logger('Users Error ' . $exception->getMessage());
+            Log::alert('Users Error ' . $exception->getMessage());
         }
     }
 
@@ -57,7 +60,25 @@ class UsersController extends Controller
 
             return back()->with('success', 'Added User Successfully');
         } catch (\Exception $exception) {
-            logger('add User Error ' . $exception->getMessage());
+            Log::alert('add User Error ' . $exception->getMessage());
+        }
+    }
+
+    public function uploadCSV(Request $request)
+    {
+        try {
+            $image = $request->file('csv');
+            Excel::import(new UsersImport(), $request->file('csv'));
+
+            return response()->json([
+                'success' => true,
+            ]);
+
+        } catch (\Exception $exception) {
+            Log::alert('Error upload csv' . $exception->getMessage());
+            return response()->json([
+                'success' => $exception->getMessage(),
+            ]);
         }
     }
 }

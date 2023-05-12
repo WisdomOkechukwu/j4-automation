@@ -16,16 +16,17 @@
                                 <select class="form-select" id="bulk-action-dropdown" onchange="bulkMessageModal()">
                                     <option value="bulk-action">Bulk Action</option>
                                     <option value="bulk-message">Bulk Message</option>
+                                    <option value="upload-csv">Upload CSV</option>
                                 </select>
                             </fieldset>
                         </div>
 
                         <div class="col-md-2">
-                            @if(Auth::user()->role_id == 999)
-                            <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
-                                data-bs-target="#add-user">
-                                Add User
-                            </button>
+                            @if (Auth::user()->role_id == 999)
+                                <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
+                                    data-bs-target="#add-user">
+                                    Add User
+                                </button>
                             @endif
                         </div>
                     </div>
@@ -397,6 +398,39 @@
             </div>
         </div>
 
+        <div class="modal fade" id="upload-csv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">
+                            Upload CSV
+                        </h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <input type="hidden" id='user-token' name='_token' value="{{ csrf_token() }}">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <p class="card-text">Upload CSV here
+                                </p>
+                                <!-- Basic file uploader -->
+                                <input type="file" name="csv" class="basic-filepond">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="single-message-modal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -461,78 +495,90 @@
                             <i data-feather="x"></i>
                         </button>
                     </div>
-                        @csrf
-                        <div class="modal-body">
-                            <div class="card">
-                                <form action={{ route('admin.add.user') }} method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="mb-3 col-md-6">
-                                            <label for="firstName" class="form-label">First Name</label>
-                                            <input class="form-control" type="text" id="firstName" name="firstName"
-                                                autofocus required />
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="lastName" class="form-label">Last Name</label>
-                                            <input class="form-control" type="text" name="lastName" id="lastName" required/>
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label class="form-label" for="country">Job role</label>
-                                            <select class="select2 form-select" name="role" required>
-                                                <option value="">Select Job Role</option>
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label" for="country">Gender</label>
-                                            <select id="country" class="select2 form-select" name='gender' required>
-                                                <option value="">Select Gender</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label" for="country">Marital status</label>
-                                            <select class="select2 form-select" name="marital_status" required>
-                                                <option value="">Select Marital Status</option>
-                                                <option value="single">Single</option>
-                                                <option value="married">Married</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label" for="country">ID Numer</label>
-                                            <input type="text" class="form-control" name="id_number"
-                                                placeholder="Enter ID Number" required/>
-                                        </div>
-
-                                        <div class="mb-3 col-md-6">
-                                            <label for="address" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" id="address" value=""
-                                                name="address" placeholder="Enter Address" required/>
-                                        </div>
-
-                                        <div class="mb-3 col-md-6">
-                                            <label for="address" class="form-label">Password</label>
-                                            <input type="password" id="password" class="form-control" name="password"
-                                                placeholder="Enter Password" autocomplete="off" required/>
-                                        </div>
+                    @csrf
+                    <div class="modal-body">
+                        <div class="card">
+                            <form action={{ route('admin.add.user') }} method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input class="form-control" type="text" id="firstName" name="firstName"
+                                            autofocus required />
                                     </div>
-                                    <div class="mt-2">
-                                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input class="form-control" type="text" name="lastName" id="lastName"
+                                            required />
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label" for="country">Job role</label>
+                                        <select class="select2 form-select" name="role" required>
+                                            <option value="">Select Job Role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="country">Gender</label>
+                                        <select id="country" class="select2 form-select" name='gender' required>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="country">Marital status</label>
+                                        <select class="select2 form-select" name="marital_status" required>
+                                            <option value="">Select Marital Status</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="country">ID Numer</label>
+                                        <input type="text" class="form-control" name="id_number"
+                                            placeholder="Enter ID Number" required />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="address" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="address" value=""
+                                            name="address" placeholder="Enter Address" required />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="address" class="form-label">Password</label>
+                                        <input type="password" id="password" class="form-control" name="password"
+                                            placeholder="Enter Password" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                </div>
+                            </form>
                         </div>
-                        {{-- <div class="modal-footer"> --}}
-                            {{-- <button type="submit" class="btn btn-primary ml-1">
+                    </div>
+                    {{-- <div class="modal-footer"> --}}
+                    {{-- <button type="submit" class="btn btn-primary ml-1">
                                 Add User
                             </button> --}}
-                        {{-- </div> --}}
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>
     </section>
+    <!-- filepond validation -->
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <!-- image editor -->
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+    </script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
+    <!-- filepond -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="{{ asset('assets/js/csvFilePond.js') }}"></script>
 @endsection

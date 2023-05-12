@@ -31,6 +31,8 @@ Route::GET('/field-worker-overview/{month?}/{year?}', [FieldWorkersTrackingsOver
 
 Route::GET('/users', [UsersController::class,'allUsers'])->name('admin.users');
 
+Route::POST('/upload-csv', [UsersController::class,'uploadCSV'])->name('admin.upload-csv');
+
 Route::POST('/add-user', [UsersController::class,'addUser'])->name('admin.add.user');
 
 Route::GET('/messages', [MessageController::class,'userMessage'])->name('admin.messages');

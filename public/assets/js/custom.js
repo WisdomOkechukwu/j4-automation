@@ -230,6 +230,10 @@ $(document).ready(function() {
         if(dropdownValue == "bulk-message"){
             $('#bulk-assign-modal').modal('show');
         }
+
+        if(dropdownValue == "upload-csv"){
+            $('#upload-csv').modal('show');
+        }
         
     }
 
