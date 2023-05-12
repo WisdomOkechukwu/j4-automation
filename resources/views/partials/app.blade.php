@@ -122,7 +122,26 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, {{ auth()->user()->full_name }}!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.user-profile') }}"><i
+                                    <li><a class="dropdown-item" href="
+                                    @switch(auth()->user()->role_id)
+                                        @case(999)
+                                            {{ route('admin.user-profile') }}
+                                            @break
+                                        @case(889)
+                                            {{ route('operator.profile') }}
+                                            @break
+                                        @case(779)
+                                            {{ route('field.admin.profile') }}
+                                            @break
+                                        @case(777)
+                                            {{ route('field.worker.profile') }}
+                                            @break
+                                    
+                                        @default
+                                            {{ route('home') }}
+                                    @endswitch"
+                                    
+                                    ><i
                                                 class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
                                     <li><a class="dropdown-item" href="#"
