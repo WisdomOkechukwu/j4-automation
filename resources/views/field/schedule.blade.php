@@ -101,7 +101,7 @@
         </div>
 
         <div class="row container">
-            <h5 class="mt-4 mb-4 is-valid">Enginnering Schedule</h5>
+            <h5 class="mt-4 mb-4 is-valid">Engineering Schedule</h5>
             <div>
                 <div class="container row">
                     <div class="col-md-2 mb-4">
