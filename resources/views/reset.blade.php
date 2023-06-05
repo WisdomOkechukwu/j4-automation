@@ -46,39 +46,36 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2 text-center">Please Input your login Details</h4>
+                        <h4 class="mb-2 text-center">Enter Your New Password Below</h4>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('forgot.reset') }}" method="POST">
                             @csrf
+                            <input type="hidden" name='email' value="{{ $email }}" />
+
                             <div class="mb-3">
-                                <label for="email" class="form-label">ID Number</label>
-                                @error('email')
+                                <label for="password" class="form-label">Enter Password</label>
+                                @error('password')
                                     <div id="defaultFormControlHelp" class="form-text">
                                         <span style="color:red;">{{ $message }}</span>
                                     </div>
                                 @enderror
-                                <input type="text" class="form-control" name="id_number"
-                                    placeholder="Enter your ID Number" autofocus
-                                    @error('email')
+                                <input type="password" class="form-control" name="password"
+                                    placeholder="Enter your Password" autofocus
+                                    @error('password')
                                       style="border-color: red"
                                     @enderror />
                             </div>
 
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
+                                    <label class="form-label" for="password">Confirm Password</label>
                                     {{-- <a href="auth-forgot-password-basic.html">
                                         <small>Forgot Password?</small>
                                       </a> --}}
                                 </div>
-                                @error('email')
-                                    <div id="defaultFormControlHelp" class="form-text">
-                                        <span style="color:red;">{{ $message }}</span>
-                                    </div>
-                                @enderror
                                 <div class="input-group input-group-merge">
-                                    <input type="password" class="form-control" name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        placeholder="Enter your Password Again"
                                         @error('password')
                         style="border-color: red"
                       @enderror />
@@ -92,13 +89,13 @@
                   </div> --}}
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Reset</button>
                             </div>
                         </form>
 
                         <p class="text-center">
-                            <span>Forgot password?</span>
-                            <a href="{{ route('forgot') }}">
+                            <span>Login</span>
+                            <a href="{{ route('login') }}">
                                 <span>Click Here !</span>
                             </a>
                         </p>
