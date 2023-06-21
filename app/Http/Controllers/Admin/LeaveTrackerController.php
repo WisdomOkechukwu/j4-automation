@@ -12,7 +12,7 @@ class LeaveTrackerController extends Controller
     public function leaveTracker()
     {
         try {
-            $users = User::with(['role', 'leave_tracker'])->get();
+            $users = User::with(['role', 'leave_tracker'])->whereNot('role_id',9999)->get();
 
             $admins = $users->where('role_id', 999);
             $operators = $users->where('role_id', 889);

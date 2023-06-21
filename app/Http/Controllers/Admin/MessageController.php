@@ -91,6 +91,8 @@ class MessageController extends Controller
                         $route = route('operator.profile.messages');
                     } elseif ($user->role_id == 999) {
                         $route = route('admin.messages');
+                    } elseif ($user->role_id == 9999) {
+                        $route = route('admin.messages');
                     }
                     EmailHelper::send($user, $subject, $body, true, 'Show Inbox', $route);
                 endif;
@@ -126,6 +128,8 @@ class MessageController extends Controller
             } elseif ($user->role_id == 889) {
                 $route = route('operator.profile.messages');
             } elseif ($user->role_id == 999) {
+                $route = route('admin.messages');
+            } elseif ($user->role_id == 9999) {
                 $route = route('admin.messages');
             }
 

@@ -55,6 +55,10 @@
                 </div>
                 {{-- sidbar for Admins --}}
                 @switch(auth()->user()->role_id)
+                    @case(9999)
+                        @include('partials.sidebar.admin')
+                    @break
+
                     @case(999)
                         @include('partials.sidebar.admin')
                     @break
@@ -124,6 +128,9 @@
                                     </li>
                                     <li><a class="dropdown-item" href="
                                     @switch(auth()->user()->role_id)
+                                        @case(9999)
+                                            {{ route('admin.user-profile') }}
+                                            @break
                                         @case(999)
                                             {{ route('admin.user-profile') }}
                                             @break

@@ -20,6 +20,9 @@ class HomeController extends Controller
         EmailHelper::send(Auth::user(), $subject, $body, true, 'Login', 'login');
 
         switch ($role) {
+            case 9999:
+                return redirect()->route('admin.index');
+                break;
             case 999:
                 return redirect()->route('admin.index');
                 break;

@@ -109,6 +109,8 @@ class UserProfileController extends Controller
                 $route = route('operator.profile');
             } elseif ($user->role_id == 999) {
                 $route = route('admin.user-profile');
+            } elseif ($user->role_id == 9999) {
+                $route = route('admin.user-profile');
             }
 
             EmailHelper::send($user, $subject, $body, true, 'Show Profile', $route);

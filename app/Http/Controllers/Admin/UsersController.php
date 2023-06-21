@@ -20,6 +20,7 @@ class UsersController extends Controller
             $users = User::with('role')
                 ->whereNot('id', Auth::user()->id)
                 ->orderBy('updated_at', 'DESC')
+                ->whereNot('role_id', 9999)
                 ->get();
 
             $admins = $users->where('role_id', 999);
