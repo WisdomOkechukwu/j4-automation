@@ -18,7 +18,7 @@ class HomePageController extends Controller
             $endOfMonth = now()->endOfMonth();
 
             // staff strength
-            $staffStrength = number_format(User::count());
+            $staffStrength = number_format(User::whereNot('role_id',9999)->count());
 
             //issued tickets
             $issuedTickets = MealTicket::where('date', '>=', $startOfMonth)
