@@ -13,10 +13,10 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         //admin 
-        $admin1 = [
-            'id' => 9999,
-            'name' => 'Admin',
-        ];
+        // $admin1 = [
+        //     'id' => 9999,
+        //     'name' => 'Admin',
+        // ];
         
         $admin2 = [
             'id' => 999,
@@ -37,7 +37,7 @@ class RoleSeeder extends Seeder
             'id' => 777,
             'name' => 'Field Worker',
         ];
-        \App\Models\Role::create($admin1);
+        // \App\Models\Role::create($admin1);
         \App\Models\Role::create($admin2);
         \App\Models\Role::create($operator);
         \App\Models\Role::create($fieldWorker);

@@ -15,7 +15,6 @@ class ScheduleController extends Controller
         try {
             $users = User::with('role')
                 ->whereNot('role_id', 999)
-                ->whereNot('role_id', 9999)
                 ->get();
 
             $operators = $users->where('role_id', 889);

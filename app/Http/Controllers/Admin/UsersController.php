@@ -20,7 +20,6 @@ class UsersController extends Controller
             $users = User::with('role')
                 ->whereNot('id', Auth::user()->id)
                 ->orderBy('updated_at', 'DESC')
-                ->whereNot('role_id', 9999)
                 ->get();
 
             $admins = $users->where('role_id', 999);
@@ -28,7 +27,7 @@ class UsersController extends Controller
             $fieldAdmin = $users->where('role_id', 779);
             $fieldWorker = $users->where('role_id', 777);
 
-            $roles = Role::whereNot('id',9999)->get();
+            $roles = Role::all();
 
             return view('admin.users', compact(['operators', 'fieldAdmin', 'fieldWorker', 'users', 'admins', 'roles']));
         } catch (\Exception $exception) {

@@ -14,14 +14,14 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         // role_id, id_number, password, email
-        $data = [
-            'first_name' => "Testing",
-            'last_name' => "Tester",
-            'role_id' => 9999,
-            'id_number' => "JamesBond007",
-            'email' => "JamesBond007@gmail.com",
-            'password' => Hash::make("12345678"),
-        ];
-        \App\Models\User::create($data);
+        // $data = [
+        //     'first_name' => "Testing",
+        //     'last_name' => "Tester",
+        //     'role_id' => 9999,
+        //     'id_number' => "JamesBond007",
+        //     'email' => "JamesBond007@gmail.com",
+        //     'password' => Hash::make("12345678"),
+        // ];
+        // \App\Models\User::create($data);
     }
 }
