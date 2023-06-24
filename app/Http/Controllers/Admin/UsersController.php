@@ -28,7 +28,7 @@ class UsersController extends Controller
             $fieldAdmin = $users->where('role_id', 779);
             $fieldWorker = $users->where('role_id', 777);
 
-            $roles = Role::all();
+            $roles = Role::whereNot('id',9999)->get();
 
             return view('admin.users', compact(['operators', 'fieldAdmin', 'fieldWorker', 'users', 'admins', 'roles']));
         } catch (\Exception $exception) {
