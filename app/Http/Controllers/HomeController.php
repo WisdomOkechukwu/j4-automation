@@ -17,7 +17,7 @@ class HomeController extends Controller
 
         $body = 'We noticed you logged in on ' . now()->format('Y M d h:ia') . ' WAT. if this wasn\'t you, kindly contact the admin or if you can login please change your password';
         $subject = 'Login Confirmation';
-        EmailHelper::send(Auth::user(), $subject, $body, true, 'Login', 'login');
+        EmailHelper::send(Auth::user(), $subject, $body, true, 'Login', route('login'));
 
         switch ($role) {
             case 9999:
