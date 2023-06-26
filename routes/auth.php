@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    dd(url());
     return redirect('https://portal.j4automation.org');
 });
 
