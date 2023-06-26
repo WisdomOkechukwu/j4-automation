@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -49,11 +50,15 @@ class ProfileController extends Controller
             $user->address = $request->address;
             $user->marital_status = $request->marital_status;
             if ($request->password !== null) {
+                dd('ARe you trying to change the password');
                 $user->password = Hash::make($request->password);
             }
 
             $user->save();
             return back()->with('success', 'Profile Updated');
+        } catch (ValidationException $th) {
+            return back()->with('error', $th->validator->errors()->first());
+            logger('Profile Action Error ' . $th->getMessage());
         } catch (\Exception $exception) {
             logger('Profile Action Error ' . $exception->getMessage());
         }
