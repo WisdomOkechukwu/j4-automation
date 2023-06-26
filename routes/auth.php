@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\URL;
 */
 
 Route::get('/', function () {
-    dd(URL::current());
-    return redirect('https://portal.j4automation.org');
+    if (strpos(URL::current(), 'portal.j4automation.org') !== false) {
+        return redirect('https://portal.j4automation.org');
+    }
+    
 });
 
 Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name('login');
