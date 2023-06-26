@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect('https://portal.j4automation.org');
 });
 
 Route::match(['GET', 'POST'], '/login', [LoginController::class, 'login'])->name('login');
