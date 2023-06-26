@@ -50,7 +50,6 @@ class ProfileController extends Controller
             $user->address = $request->address;
             $user->marital_status = $request->marital_status;
             if ($request->password !== null) {
-                dd('ARe you trying to change the password');
                 $user->password = Hash::make($request->password);
             }
 
