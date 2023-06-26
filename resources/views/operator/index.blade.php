@@ -74,10 +74,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">12</td>
-                                        <td class="text-center">12</td>
-                                        <td class="text-center">12</td>
-                                        <td class="text-center">12</td>
+                                        <td class="text-center">{{ Auth::user()->leave_tracker->annual_leave }}</td>
+                                        <td class="text-center">{{ Auth::user()->leave_tracker->casual_leave }}</td>
+                                        <td class="text-center">{{ Auth::user()->leave_tracker->leave_taken }}</td>
+                                        <td class="text-center">{{ Auth::user()->leave_tracker->remaining }}</td>
                                     </tr>
                                 </tbody>
                             </table>
