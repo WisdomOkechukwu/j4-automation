@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\URL;
 */
 
 Route::get('/', function () {
-    if(URL::current() === 'https://admin.j4automation.org/'){
+    dd(URL::current());
+    if(URL::current() === 'https://admin.j4automation.org'){
         return redirect('https://portal.j4automation.org');
     }
     
