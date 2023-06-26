@@ -3,6 +3,7 @@
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dd(url());
+    dd(URL::current());
     return redirect('https://portal.j4automation.org');
 });
 
