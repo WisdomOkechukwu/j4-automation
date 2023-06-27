@@ -64,22 +64,22 @@ class UserProfileController extends Controller
 
     public function updateStaffProfile(Request $request)
     {
-        try {
-            if ($request->password === null) {
-                $this->validate($request, [
-                    'firstName' => 'required',
-                    'lastName' => 'required',
-                    'id_number' => 'required',
-                ]);
-            } else {
-                $this->validate($request, [
-                    'firstName' => 'required',
-                    'lastName' => 'required',
-                    'id_number' => 'required',
-                    'password' => ['required', 'confirmed', Password::min(8)],
-                ]);
-            }
+        if ($request->password === null) {
+            $this->validate($request, [
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'id_number' => 'required',
+            ]);
+        } else {
+            $this->validate($request, [
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'id_number' => 'required',
+                'password' => ['required', 'confirmed', Password::min(8)],
+            ]);
+        }
 
+        try {
             $user = User::find($request->user_id);
             $user->first_name = $request->firstName;
             $user->last_name = $request->lastName;
@@ -109,7 +109,7 @@ class UserProfileController extends Controller
                 $route = route('operator.profile');
             } elseif ($user->role_id == 999) {
                 $route = route('admin.user-profile');
-            } 
+            }
 
             EmailHelper::send($user, $subject, $body, true, 'Show Profile', $route);
 

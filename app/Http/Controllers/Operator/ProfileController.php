@@ -27,22 +27,23 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        try {
-            if ($request->password === null) {
-                $this->validate($request, [
-                    'firstName' => 'required',
-                    'lastName' => 'required',
-                    'id_number' => 'required',
-                ]);
-            } else {
-                $this->validate($request, [
-                    'firstName' => 'required',
-                    'lastName' => 'required',
-                    'id_number' => 'required',
-                    'password' => ['required', 'confirmed', Password::min(8)],
-                ]);
-            }
+        // try {
+        if ($request->password === null) {
+            $this->validate($request, [
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'id_number' => 'required',
+            ]);
+        } else {
+            $this->validate($request, [
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'id_number' => 'required',
+                'password' => ['required', 'confirmed', Password::min(8)],
+            ]);
+        }
 
+        try {
             $user = User::find($request->user_id);
             $user->first_name = $request->firstName;
             $user->last_name = $request->lastName;
@@ -55,9 +56,9 @@ class ProfileController extends Controller
 
             $user->save();
             return back()->with('success', 'Profile Updated');
-        } catch (ValidationException $exception) {
-            logger('Profile Action Error ' . $exception->validator->errors()->first());
-            return back()->with('error', $exception->validator->errors()->first());
+            // } catch (ValidationException $th) {
+            //     return back()->with('error', $th->validator->errors()->first());
+            //     logger('Profile Action Error ' . $th->getMessage());
         } catch (\Exception $exception) {
             logger('Profile Action Error ' . $exception->getMessage());
         }
