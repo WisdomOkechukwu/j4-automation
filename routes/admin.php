@@ -37,6 +37,8 @@ Route::POST('/add-user', [UsersController::class,'addUser'])->name('admin.add.us
 
 Route::GET('/messages', [MessageController::class,'userMessage'])->name('admin.messages');
 
+Route::GET('/delete-messages/{id}', [MessageController::class,'deleteMessage'])->name('admin.message.delete');
+
 Route::GET('/user-profile', [UserProfileController::class,'userProfile'])->name('admin.user-profile');
 
 Route::GET('/staff-profile/{user}', [UserProfileController::class,'staffProfile'])->name('admin.staff-profile');

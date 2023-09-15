@@ -72,7 +72,7 @@
                                     Field Workers({{ $fieldWorker->count() }})</a>
                             </li>
                         </ul>
-                        <form action={{ route('admin.bulk-message') }} method="POST" id='bulk-message-form'>
+                        <form action={{ route('admin.bulk-message') }} method="POST" id='bulk-message-form' enctype="multipart/form-data">
                             @csrf
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active mt-4" id="all" role="tabpanel"
@@ -395,6 +395,16 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                    <div class="form-group row align-items-center">
+                                        <div class="col-lg-12 col-12">
+                                            <label class="col-form-label">Attachment</label>
+                                            <input type="file" name="bulk_attachment" id="bulk-attachment-data" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -457,7 +467,7 @@
                             <i data-feather="x"></i>
                         </button>
                     </div>
-                    <form action={{ route('admin.user-message') }} method="POST">
+                    <form action={{ route('admin.user-message') }} method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <input type="hidden" id='single-user-id' name='user'>
@@ -477,6 +487,15 @@
                                         <div class="col-lg-12 col-12">
                                             <label class="col-form-label">Body</label>
                                             <textarea id="single-body" name="single_body" cols="30" rows="10" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group row align-items-center">
+                                        <div class="col-lg-12 col-12">
+                                            <label class="col-form-label">Attachment</label>
+                                            <input type="file" name="single_attachment" class="form-control" required >
                                         </div>
                                     </div>
                                 </div>
@@ -584,15 +603,4 @@
             </div>
         </div>
     </section>
-    <!-- filepond validation -->
-    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-    <!-- image editor -->
-    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
-    </script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-
-    <!-- filepond -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script src="{{ asset('assets/js/csvFilePond.js') }}"></script>
 @endsection

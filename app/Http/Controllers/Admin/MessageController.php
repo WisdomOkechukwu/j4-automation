@@ -14,20 +14,16 @@ class MessageController extends Controller
 {
     public function userMessage()
     {
-        try {
-            $sentMessages = Messages::with(['receiver'])
-                ->where('sender_id', Auth::user()->id)
-                ->orderBy('created_at', 'DESC')
-                ->get();
+        $sentMessages = Messages::with(['receiver'])
+            ->where('sender_id', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
-            $receivedMessages = Messages::with(['sender'])
-                ->where('receiver_id', Auth::user()->id)
-                ->orderBy('created_at', 'DESC')
-                ->get();
-            return view('admin.user_message', compact(['sentMessages', 'receivedMessages']));
-        } catch (\Exception $exception) {
-            logger('Messages Error ' . $exception->getMessage());
-        }
+        $receivedMessages = Messages::with(['sender'])
+            ->where('receiver_id', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        return view('admin.user_message', compact(['sentMessages', 'receivedMessages']));
     }
 
     public function readMessage($id)
@@ -57,8 +53,18 @@ class MessageController extends Controller
     public function handleBulkMessage(Request $request)
     {
         try {
-            $bulkUsers = $request->except('_token', 'bulk_message', 'bulk_subject');
+            $bulkUsers = $request->except('_token', 'bulk_message', 'bulk_subject', 'bulk_attachment');
             $usersArray = array_keys($bulkUsers);
+
+            $filename = NULL;
+            if($request->has('bulk_attachment')){
+                $image = $request->file('bulk_attachment');
+                $extension = $image->getClientOriginalExtension();
+                $fileName = uniqid() . '-bulk.' . $extension;
+                $filename = $fileName;
+
+                $image->move(public_path('storage/attachment'), $fileName);
+            }
 
             $bulkMessages = new BulkMessages();
             $bulkMessages->sender_id = Auth::user()->id;
@@ -75,6 +81,7 @@ class MessageController extends Controller
                     $message->title = $request->bulk_subject;
                     $message->message = $request->bulk_message;
                     $message->is_bulk = 1;
+                    $message->attachment = $filename;
                     $message->bulk_id = $bulkMessages->id;
                     $message->save();
 
@@ -107,6 +114,8 @@ class MessageController extends Controller
         try {
             $user = json_decode($request->user);
 
+            //appending message attachment
+
             $message = new Messages();
             $message->sender_id = Auth::user()->id;
             $message->receiver_id = $user->id;
@@ -114,6 +123,16 @@ class MessageController extends Controller
             $message->message = $request->single_body;
             $message->is_bulk = 0;
             $message->bulk_id = null;
+
+            if($request->has('single_attachment')){
+                $image = $request->file('single_attachment');
+                $extension = $image->getClientOriginalExtension();
+                $fileName = $user->email . uniqid() . '.' . $extension;
+
+                $image->move(public_path('storage/attachment'), $fileName);
+                $message->attachment = $fileName;
+            }
+
             $message->save();
 
             $body = 'New message sent from ' . Auth::user()->full_name . ' Check your inbox to see message';
@@ -127,7 +146,7 @@ class MessageController extends Controller
                 $route = route('operator.profile.messages');
             } elseif ($user->role_id == 999) {
                 $route = route('admin.messages');
-            } 
+            }
 
             EmailHelper::send(User::find($user->id), $subject, $body, true, 'Show Inbox', $route);
 
@@ -136,5 +155,13 @@ class MessageController extends Controller
         } catch (\Exception $exception) {
             logger('Single Messages Error ' . $exception->getMessage());
         }
+    }
+
+    public function deleteMessage($id){
+        if(Auth::user()->role->id !== 999){
+            abort(404);
+        }
+        Messages::where('id',$id)->delete();
+        return back()->with('success', "Message deleted successfully.");
     }
 }

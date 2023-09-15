@@ -35,7 +35,7 @@ FilePond.setOptions({
             request.onload = function () {
                 if (request.status >= 200 && request.status < 300) {
                     load(request.responseText);
-                    
+
                 } else {
                     error('oh no');
                 }

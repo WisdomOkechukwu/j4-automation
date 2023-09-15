@@ -71,6 +71,13 @@
                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             {{ $message->message }}
+                                            <div class="mt-2 mb-2">
+                                                @if ($message->attachment)
+                                                    <a target=”_blank” class="btn btn-primary" href="{{ asset('storage/attachment/' . $message->attachment) }}">View Attachment</a>
+                                                @endif
+                                                <a class="btn btn-danger" href="{{ route('admin.message.delete',[$message->id]) }}">Delete Message</a>
+                                            </div>
+                                            <hr>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +138,14 @@
                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             {{ $message->message }}
+                                            <div class="mt-2 mb-2">
+                                                @if ($message->attachment)
+                                                    <a target=”_blank” class="btn btn-primary" href="{{ asset('storage/attachment/' . $message->attachment) }}">View Attachment</a>
+                                                @endif
+                                                <a class="btn btn-danger" href="{{ route('admin.message.delete',[$message->id]) }}">Delete Message</a>
+                                            </div>
                                         </div>
+                                        <hr>
                                     </div>
                                 </div>
                             @endforeach
